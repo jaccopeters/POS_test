@@ -1,0 +1,147 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>loyalty_number.sikuli</h2> <a href="loyalty_number.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> general_buttons
+<span class="kw">import</span> test_cases
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> time
+<span class="kw">import</span> string
+<span class="kw">import</span> returns_with_receipt
+
+<span class="kw">global</span> l_general_test_settings
+l_general_test_settings = test_settings.general_test_settings( )
+<span class="kw">global</span> locale
+locale = l_general_test_settings[<span class="dig">8</span>]
+<span class="kw">global</span> l_base_dir
+l_base_dir = l_general_test_settings[<span class="dig">10</span>]
+<span class="kw">global</span> l_test_settings
+l_test_settings = test_settings.loyalty_number(locale)
+
+<span class="kw">def</span> add():
+
+    y = l_test_settings[<span class="dig">0</span>]
+    general_functions.fill_basket(str(y[<span class="dig">0</span>]), y[<span class="dig">1</span>])
+
+    general_buttons.main_page_footermenu_btns(<span class="str">'CUSTOMER btn'</span>, <span class="dig">200</span>, <span class="dig">0</span>)
+
+    <span class="cmt"># click ENTER LOYALTY NUMBER button</span>
+    general_buttons.click_element(<span class="str">'basket_page_customer_menu'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>, <span class="str">'ENTER LOYALTY NUMBER btn'</span>)
+
+    <span class="skw">type</span>(y[<span class="dig">2</span>])
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="cmt"># click ENTER VOUCHER NUMBER button</span>
+    general_buttons.click_element(<span class="str">'basket_page_customer_loyalty_menu'</span>, <span class="dig">70</span>, -<span class="dig">70</span>, <span class="str">'ENTER VOUCHER NUMBER btn'</span>)
+    <span class="skw">type</span>(y[<span class="dig">3</span>])
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">type</span>(Key.ENTER)
+
+    general_buttons.click_element(<span class="str">'secondary_pages_key_pad'</span>, <span class="dig">100</span>, <span class="dig">100</span>, <span class="str">'TOTAL btn'</span>)
+    <span class="skw">type</span>(Key.ENTER)
+
+    general_functions.pay_with_off_line_card()
+
+<span class="kw">def</span> remove():
+
+    y = l_test_settings[<span class="dig">0</span>]
+    general_functions.fill_basket(str(y[<span class="dig">0</span>]), y[<span class="dig">1</span>])
+
+    general_buttons.main_page_footermenu_btns(<span class="str">'CUSTOMER btn'</span>, <span class="dig">200</span>, <span class="dig">0</span>)
+
+    <span class="cmt"># click ENTER LOYALTY NUMBER button</span>
+    general_buttons.click_element(<span class="str">'basket_page_customer_menu'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>, <span class="str">'ENTER LOYALTY NUMBER btn'</span>)
+
+    <span class="skw">type</span>(y[<span class="dig">2</span>])
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="cmt"># click ENTER VOUCHER NUMBER button</span>
+    general_buttons.click_element(<span class="str">'basket_page_customer_loyalty_menu'</span>, <span class="dig">70</span>, -<span class="dig">70</span>, <span class="str">'ENTER VOUCHER NUMBER btn'</span>)
+    <span class="skw">type</span>(y[<span class="dig">3</span>])
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">type</span>(Key.ENTER)
+
+    general_buttons.click_element(<span class="str">'secondary_pages_key_pad'</span>, <span class="dig">100</span>, <span class="dig">100</span>, <span class="str">'TOTAL btn'</span>)
+    <span class="skw">type</span>(Key.ENTER)
+
+        <span class="cmt"># remove loyalty</span>
+    general_buttons.basket_page_footer_menu_btns(<span class="str">'CUSTOMER btn'</span>, <span class="dig">70</span>, <span class="dig">0</span>)
+    general_buttons.click_element(<span class="str">'basket_page_other_customers_menu'</span>, <span class="dig">200</span>, <span class="dig">0</span>, <span class="str">'REMOVE LOYALTY btn'</span>)
+    <span class="skw">type</span>(Key.ENTER)
+
+    general_functions.pay_with_off_line_card()
+</pre>
+</body>
+</html>

@@ -1,0 +1,582 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>test_settings.sikuli</h2> <a href="test_settings.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+
+
+<span class="cmt"># constants used in the tests</span>
+<span class="kw">def</span> constants(constant_to_search_for):
+    CONSTANTS = [[<span class="str">'KEY_PAD_AREA'</span>, <span class="dig">460</span>, <span class="dig">130</span>, <span class="dig">570</span>, <span class="dig">380</span>],
+                 [<span class="str">'MENU_BUTTONS_AREA'</span>, <span class="dig">460</span>, <span class="dig">500</span>, <span class="dig">570</span>, <span class="dig">210</span>],
+                 [<span class="str">'FOOTER_MENU_AREA'</span>, <span class="dig">460</span>, <span class="dig">700</span>, <span class="dig">570</span>, <span class="dig">70</span>],
+                 [<span class="str">'HAMBURGER_BUTTON_AREA'</span>, <span class="dig">0</span>, <span class="dig">0</span>, <span class="dig">60</span>, <span class="dig">80</span>],
+                 [<span class="str">'HAMBURGER_MENU_AREA'</span>, <span class="dig">70</span>, <span class="dig">120</span>, <span class="dig">890</span>, <span class="dig">350</span>],
+                 [<span class="str">'TAKE_OVER_AREA'</span>, <span class="dig">597</span>, <span class="dig">671</span>, <span class="dig">427</span>, <span class="dig">97</span>]]
+
+    <span class="kw">print</span>(<span class="str">'constant_to_search_for: '</span> + str(constant_to_search_for))
+    <span class="cmt"># print('CONSTANTS: ' + str(CONSTANTS))</span>
+
+    <span class="kw">if</span> constant_to_search_for == <span class="str">'ALL'</span>:
+        <span class="kw">print</span>(<span class="str">'ALL'</span>)
+        <span class="kw">return</span> CONSTANTS
+    <span class="kw">else</span>:
+        <span class="kw">for</span> CONSTANT <span class="kw">in</span> CONSTANTS:
+            <span class="kw">if</span> CONSTANT[<span class="dig">0</span>] == constant_to_search_for:
+                <span class="kw">print</span>(<span class="str">'CONSTANT: '</span> + str(CONSTANT))
+                <span class="kw">return</span> CONSTANT
+
+
+<span class="kw">def</span> general_test_settings():
+    <span class="cmt"># GERMANY</span>
+    <span class="cmt">#                           0      1       2       3        4       5           6     7      8       9          10                                       11</span>
+    <span class="cmt">#                           ENV    STORE   CASHIER PASWW    CASHIER PASSW       BRAND TILL   LOCALE  #OF DENOM   BASE DIR                                GUI TEST</span>
+    <span class="cmt">#&gt;l_general_test_settings = ["TST", "A119", "250", "50055", "251", "50055", "CK", "101", "de_DE", 5, "C:\\Users\\31000pos\\Desktop\\Sikuli\\", "NO"]</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "A231", "103",  "50055", "100",  "50055",  "TH", "101", "de_DE", 24,      "D:\\Sikuli\\",                             "NO"]</span>
+    <span class="cmt"># l_general_test_settings = ["INT", "A233", "14",   "50055", "15",   "30033", "TH", "101", "de_DE", 24,      "C:\\Users\\31000pos\\Desktop\\Sikuli\\", "NO"]</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "A233", "250",  "50055", "251",  "50055",  "TH", "101", "de_DE", 5,      "C:\\Users\\31000pos\\Desktop\\Sikuli\\", "NO"]</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "A244", "2001",  "30033", "2002",  "5123456",  "TH", "101", "de_DE", 10,      "C:\\Users\\31000pos\\Desktop\\Sikuli\\", "NO"]</span>
+
+    <span class="cmt"># SWITZERLAND</span>
+    <span class="cmt">#                           0      1       2       3        4       5            6     7      8       9          10                                       11</span>
+    <span class="cmt">#                           ENV    STORE   CASHIER PASWW    CASHIER PASSW        BRAND TILL   LOCALE  #OF DENOM   BASE DIR                                GUI TEST</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "A212", "106",  "50055", "107",  "50055",  "TH", "101", "de_DE", 24,      "C:\\Users\\31000pos\\Desktop\\Sikuli\\", "NO"]</span>
+    l_general_test_settings = [<span class="str">"TST"</span>, <span class="str">"A208"</span>, <span class="str">"108"</span>,  <span class="str">"50055"</span>, <span class="str">"109"</span>,  <span class="str">"50055"</span>,  <span class="str">"TH"</span>, <span class="str">"101"</span>, <span class="str">"de_DE"</span>, <span class="dig">5</span>,      <span class="str">"C:\\Users\\31000pos\\Desktop\\Sikuli\\"</span>, <span class="str">"NO"</span>]
+
+    <span class="cmt"># THE NETHERLANDS</span>
+    <span class="cmt">#                           0      1       2       3        4       5           6     7      8       9         10                                       11</span>
+    <span class="cmt">#                           ENV    STORE   CASHIER PASWW    CASHIER PASSW       BRAND TILL   LOCALE  #OF DENOM BASE DIR                                GUI TEST</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "AL00", "2004",  "50055", "110",  "50055",  "TH", "101", "de_DE", 24,      "C:\\Users\\31000pos\\Desktop\\Sikuli\\", "NO"]</span>
+
+    <span class="cmt"># BELGIUM</span>
+    <span class="cmt">#                           0      1       2       3        4       5           6     7      8       9         10                                       11</span>
+    <span class="cmt">#                           ENV    STORE   CASHIER PASWW    CASHIER PASSW       BRAND TILL   LOCALE  #OF DENOM BASE DIR                                GUI TEST</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "A007", "102", "50055", "103", "50055", "CK", "101", "fr_BE", 4, "C:\\Users\\31000pos\\Desktop\\Sikuli\\", "NO"]</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "A008", "102", "50055", "103", "50055", "CK", "101", "fr_BE", 4, "C:\\Users\\31000pos\\Desktop\\Sikuli\\", "NO"]</span>
+
+    <span class="cmt"># UK</span>
+    <span class="cmt">#                             0      1       2       3        4       5        6     7      8       9          10</span>
+    <span class="cmt">#                             ENV    STORE   CASHIER PASWW    CASHIER PASSW    BRAND TILL   LOCALE  #OF DENOM  BASE DIR</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "AQ00", "100",  "50055", "101",  "50055", "TH",  "101", "en_GB", 5,       "C:\\Users\\31000pos\\Desktop\\Sikuli\\"]</span>
+    <span class="cmt"># l_general_test_settings = ["TST", "A340", "2001", "30033", "2002", "123456", "CK", "101", "en_GB", 5, "C:\\Users\\31000pos\\Desktop\\Sikuli\\"]</span>
+
+    <span class="kw">return</span> l_general_test_settings
+
+
+<span class="kw">def</span> item_not_found(locale, brand):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="kw">if</span> brand == <span class="str">'CK'</span>:
+            <span class="cmt">#                   0                  1</span>
+            <span class="cmt">#                   # OF DIVISIONS</span>
+            l_test_settings = [<span class="dig">9</span>]
+
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="kw">if</span> brand == <span class="str">'TH'</span>:
+            <span class="cmt">#                   0                  1</span>
+            <span class="cmt">#                   # OF DIVISIONS</span>
+            l_test_settings = [<span class="dig">11</span>]
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="kw">if</span> brand == <span class="str">'CK'</span>:
+            <span class="cmt">#                   0                  1</span>
+            <span class="cmt">#                   # OF DIVISIONS</span>
+            l_test_settings = [<span class="dig">9</span>]
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="kw">if</span> brand == <span class="str">'TH'</span>:
+            <span class="cmt">#                   0                  1</span>
+            <span class="cmt">#                   # OF DIVISIONS</span>
+            l_test_settings = [<span class="dig">11</span>]
+
+    <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> void_line_item_test_settings(locale):
+    l_test_settings = <span class="str">''</span>
+
+    <span class="kw">if</span> locale == <span class="str">"de_DE"</span>:
+        <span class="cmt">#                    0                  1   2      3     4</span>
+        <span class="cmt">#                    ARTICLE#           #   CARD   COORDINATES</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>]
+
+    <span class="kw">if</span> locale == <span class="str">"en_GB"</span>:
+        <span class="cmt">#                    0                  1   2      3     4</span>
+        <span class="cmt">#                    ARTICLE#           #   CARD   COORDINATES</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'AMEX'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>]
+
+    <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> pre_make_receipts(locale):
+    l_test_settings = <span class="str">''</span>
+
+    <span class="kw">if</span> locale == <span class="str">"de_DE"</span>:
+        <span class="cmt">#                    0                  1   2       3     4</span>
+        <span class="cmt">#                    ARTICLE#           #   CARD    COORDINATES</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">10</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>]
+
+    <span class="kw">if</span> locale == <span class="str">"en_GB"</span>:
+        <span class="cmt">#                    0                  1   2       3     4</span>
+        <span class="cmt">#                    ARTICLE#           #   CARD    COORDINATES</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">20</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>]
+
+    <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> drop_off(locale):
+    l_test_settings = <span class="str">''</span>
+
+    <span class="kw">if</span> locale == <span class="str">"de_DE"</span>:
+        <span class="cmt">#                    0                  1   2                 3</span>
+        <span class="cmt">#                    ARTICLE#           #   loyalty number    winback_number</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>, <span class="str">'17600560143461'</span>, <span class="str">'79200015000105'</span>]
+
+    <span class="kw">if</span> locale == <span class="str">"en_GB"</span>:
+        <span class="cmt">#                    0                  1   2                 3</span>
+        <span class="cmt">#                    ARTICLE#           #   loyalty number    winback_number</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>, <span class="str">'17600560143461'</span>, <span class="str">'79200015000105'</span>]
+
+    <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> returns(locale):
+    <span class="kw">if</span> locale == <span class="str">"en_GB"</span>:
+        <span class="cmt">#                    0                 1</span>
+        <span class="cmt">#                    ARTICLE#          #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">"de_DE"</span>:
+        <span class="cmt">#                    0                  1   2                 3</span>
+        <span class="cmt">#                    ARTICLE#           #   loyalty number    winback_number</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>, <span class="str">'17600560143461'</span>, <span class="str">'79200015000105'</span>]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> basic_sale_off_line_card_test_settings(locale):
+    <span class="kw">if</span> locale == <span class="str">"de_DE"</span>:
+        <span class="cmt">#                    0                  1   2                  3     4</span>
+        <span class="cmt">#                    ARTICLE#           #   CARD               COORDINATES</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>, <span class="str">'MASTERCARD'</span>, -<span class="dig">70</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'MAESTRO'</span>, <span class="dig">70</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>, <span class="str">'AMEX'</span>, <span class="dig">200</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>, <span class="str">'CHINA UNION PAY'</span>, -<span class="dig">200</span>, <span class="dig">0</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">6</span>, <span class="str">'DINERS'</span>, -<span class="dig">70</span>, <span class="dig">0</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">7</span>, <span class="str">'ALIPAY'</span>, <span class="dig">70</span>, <span class="dig">0</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">8</span>, <span class="str">'WECHAT'</span>, <span class="dig">200</span>, <span class="dig">0</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">9</span>, <span class="str">'BREUNINGER'</span>, <span class="dig">200</span>, <span class="dig">0</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">"en_GB"</span>:
+        <span class="cmt">#                    0                  1   2                  3     4</span>
+        <span class="cmt">#                    ARTICLE#           #   CARD               COORDINATES</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>, <span class="str">'MASTERCARD'</span>, -<span class="dig">70</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'MAESTRO'</span>, <span class="dig">70</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>, <span class="str">'AMEX'</span>, <span class="dig">200</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>, <span class="str">'CHINA UNION PAY'</span>, -<span class="dig">200</span>, <span class="dig">0</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">6</span>, <span class="str">'DINERS'</span>, -<span class="dig">70</span>, <span class="dig">0</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">7</span>, <span class="str">'ALIPAY'</span>, <span class="dig">70</span>, <span class="dig">0</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">8</span>, <span class="str">'WECHAT'</span>, <span class="dig">200</span>, <span class="dig">0</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> basic_sale_chf_eur_test_settings(locale):
+    <span class="kw">if</span> locale == <span class="str">"de_DE"</span>:
+        <span class="cmt">#                    0                  1</span>
+        l_test_settings = [[<span class="str">'1387904100956003'</span>, <span class="dig">6</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> cancel_receipt_test_settings(locale):
+    <span class="kw">if</span> locale == <span class="str">"de_DE"</span>:
+        <span class="cmt">#                    0                  1  2       3     4     5</span>
+        <span class="cmt">#                    ARTICLE            #  CARD    COORDINATES CANCEL BEFORE TOTAL PRICE</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'AMEX'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>, <span class="dig">1</span>, <span class="dig">80.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'DINERS'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>, <span class="dig">1</span>, <span class="dig">80.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'MAESTRO'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="dig">80.00</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">"en_GB"</span>:
+        <span class="cmt"># this test uses 2 the same articles so here we need 2 the same articles, no more and no less</span>
+        <span class="cmt">#                    0                  1  2       3     4     5</span>
+        <span class="cmt">#                    ARTICLE            #  CARD    COORDINATES CANCEL BEFORE TOTAL PRICE</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>, <span class="dig">1</span>, <span class="dig">80.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>, <span class="dig">1</span>, <span class="dig">80.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="dig">80.00</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> void_tender_type_test_settings(locale):
+    <span class="kw">if</span> locale == <span class="str">"de_DE"</span>:
+        <span class="cmt">#                    0                  1  2           3     4</span>
+        <span class="cmt">#                    ARTICLE            #  CARD        COORDINATES</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'AMEX'</span>, <span class="dig">200</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'MAESTRRO'</span>, -<span class="dig">70</span>, -<span class="dig">70</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">"en_GB"</span>:
+        <span class="cmt">#                    0                  1  2           3     4</span>
+        <span class="cmt">#                    ARTICLE            #  CARD        COORDINATES</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'VISA'</span>, -<span class="dig">200</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'AMEX'</span>, <span class="dig">200</span>, -<span class="dig">70</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'MAESTRRO'</span>, -<span class="dig">70</span>, -<span class="dig">70</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> non_merchandise_sale_test_settings(locale, brand):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="kw">if</span> brand == <span class="str">'TH'</span>:
+            <span class="kw">print</span>(<span class="str">'brand: '</span> + brand)
+            <span class="cmt">#                    0                  1  2                 3</span>
+            <span class="cmt">#                    ARTICLE            #  TYPE              PRICE</span>
+            l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'VM ITEMS'</span>, <span class="dig">1.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'ALTERATIONS'</span>, <span class="dig">2.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'REPAIR SERVICE'</span>, <span class="dig">3.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'TOMMYXYOU'</span>, <span class="dig">4.00</span>]]
+            <span class="kw">return</span> l_test_settings
+
+        <span class="kw">if</span> brand == <span class="str">'CK'</span>:
+            <span class="kw">print</span>(<span class="str">'brand: '</span> + brand)
+            <span class="cmt">#                    0                  1  2                 3</span>
+            <span class="cmt">#                    ARTICLE            #  TYPE              PRICE</span>
+            l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'SHOPPING BAG'</span>, <span class="dig">1.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'VM ITEMS'</span>, <span class="dig">2.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'ALTERATIONS'</span>, <span class="dig">3.00</span>]]
+            <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="kw">if</span> brand == <span class="str">'TH'</span>:
+            <span class="kw">print</span>(<span class="str">'brand: '</span> + brand)
+            <span class="cmt">#                    0                  1  2                 3</span>
+            <span class="cmt">#                    ARTICLE            #  TYPE              PRICE</span>
+            l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'SHOPPING BAG'</span>, <span class="dig">1.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'VM ITEMS'</span>, <span class="dig">2.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'ALTERATIONS'</span>, <span class="dig">3.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'REPAIR SERVICE'</span>, <span class="dig">4.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'TOMMYXYOU'</span>, <span class="dig">5.00</span>]]
+            <span class="kw">return</span> l_test_settings
+
+        <span class="kw">if</span> brand == <span class="str">'CK'</span>:
+            <span class="kw">print</span>(<span class="str">'brand: '</span> + brand)
+            <span class="cmt">#                    0                  1  2                 3</span>
+            <span class="cmt">#                    ARTICLE            #  TYPE              PRICE</span>
+            l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'SHOPPING BAG'</span>, <span class="dig">1.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'VM ITEMS'</span>, <span class="dig">2.00</span>],
+                               [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'ALTERATIONS'</span>, <span class="dig">3.00</span>]]
+            <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> manual_discount(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                  1  2</span>
+        <span class="cmt">#                    ARTICLE            #  DISCOUNT</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">10</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">11</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">12</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">13</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">14</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">15</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">16</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">17</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">18</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">19</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">20</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">21</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                    0                  1  2</span>
+        <span class="cmt">#                    ARTICLE            #  DISCOUNT</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">10</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">11</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">12</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">13</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">14</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">15</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">16</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">17</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">18</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">19</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">20</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="dig">21</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> manual_discount_transaction(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                  1  2                3     4         5</span>
+        <span class="cmt">#                    ARTICLE            #  TYPE             COORDINATES     PRICE</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'VM'</span>, -<span class="dig">70</span>, -<span class="dig">70</span>, <span class="dig">1.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'ALTERATIONS'</span>, <span class="dig">70</span>, -<span class="dig">70</span>, <span class="dig">2.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'REPAIR SERV'</span>, <span class="dig">200</span>, -<span class="dig">70</span>, <span class="dig">3.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'TOMMYXYOU'</span>, -<span class="dig">200</span>, <span class="dig">0</span>, <span class="dig">4.00</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                    0                  1  2                3     4         5</span>
+        <span class="cmt">#                    ARTICLE            #  TYPE             COORDINATES     PRICE</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'VM'</span>, -<span class="dig">70</span>, -<span class="dig">70</span>, <span class="dig">1.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'ALTERATIONS'</span>, <span class="dig">70</span>, -<span class="dig">70</span>, <span class="dig">2.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'REPAIR SERV'</span>, <span class="dig">200</span>, -<span class="dig">70</span>, <span class="dig">3.00</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'TOMMYXYOU'</span>, -<span class="dig">200</span>, <span class="dig">0</span>, <span class="dig">4.00</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> price_override(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> local_employee_discount(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                 1   2     3     4</span>
+        <span class="cmt">#                    ARTICLE           #   FN    LN    %</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">30</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">30</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                    0                 1   2     3     4</span>
+        <span class="cmt">#                    ARTICLE           #   FN    LN    %</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">30</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">30</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'Sa'</span>, <span class="str">'Ne'</span>, <span class="dig">50</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> promotions(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">2</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> bonus_buys(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> pay_out(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">5</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> check_GUI_elements(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                  1</span>
+        <span class="cmt">#                    ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> loyalty_number(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                    0                  1   2                3                  4</span>
+        <span class="cmt">#                    ARTICLE            #   loyalty number   voucher number     email for search</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'17600560143461'</span>, <span class="str">'79200015000105'</span>, <span class="str">'testb@thevalley.nl'</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>]]
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                    0                  1   2                3                  4</span>
+        <span class="cmt">#                    ARTICLE            #   loyalty number   voucher number     email for search</span>
+        l_test_settings = [[<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>, <span class="str">'17600560143461'</span>, <span class="str">'79200015000105'</span>, <span class="str">'testb@thevalley.nl'</span>],
+                           [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>]]
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> gift_receipt(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                   0                  1</span>
+        <span class="cmt">#                   ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>]
+
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                   0                  1</span>
+        <span class="cmt">#                   ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">4</span>]
+
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> commission_sale(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                   0                  1</span>
+        <span class="cmt">#                   ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>]
+
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                   0                  1</span>
+        <span class="cmt">#                   ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">3</span>]
+
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> remove_promotion(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                   0                  1</span>
+        <span class="cmt">#                   ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>]
+
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                   0                  1</span>
+        <span class="cmt">#                   ARTICLE            #</span>
+        l_test_settings = [<span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>]
+
+        <span class="kw">return</span> l_test_settings
+
+
+<span class="kw">def</span> gv_sale_and_redemption(locale):
+    <span class="kw">if</span> locale == <span class="str">'de_DE'</span>:
+        <span class="cmt">#                   0                  1</span>
+        <span class="cmt">#                   ARTICLE            #</span>
+        l_test_settings = [<span class="str">'50.00'</span>, <span class="dig">1</span>, <span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>]
+
+        <span class="kw">return</span> l_test_settings
+
+    <span class="kw">if</span> locale == <span class="str">'en_GB'</span>:
+        <span class="cmt">#                   0                  1</span>
+        <span class="cmt">#                   ARTICLE            #</span>
+        l_test_settings = [<span class="str">'50.00'</span>, <span class="dig">1</span>, <span class="str">'J2EJ204346402007'</span>, <span class="dig">1</span>]
+
+        <span class="kw">return</span> l_test_settings
+</pre>
+</body>
+</html>

@@ -1,0 +1,594 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>general_functions.sikuli</h2> <a href="general_functions.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># general modules</span>
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">import</span> general_buttons
+<span class="kw">import</span> time
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> shutil
+<span class="kw">import</span> re
+<span class="kw">import</span> string
+
+<span class="kw">global</span> l_general_test_settings
+l_general_test_settings = test_settings.general_test_settings( )
+<span class="kw">global</span> locale
+locale = l_general_test_settings[<span class="dig">8</span>]
+<span class="kw">global</span> brand
+brand = l_general_test_settings[<span class="dig">6</span>]
+<span class="kw">global</span> l_base_dir
+l_base_dir = l_general_test_settings[<span class="dig">10</span>]
+<span class="kw">global</span> l_test_settings
+l_test_settings = test_settings.basic_sale_off_line_card_test_settings(locale)
+
+<span class="kw">global</span> tr_file
+tr_file = l_general_test_settings[<span class="dig">10</span>] + <span class="str">"test_run\\test_results\\test_results.csv"</span>
+
+
+<span class="cmt"># START</span>
+
+<span class="kw">def</span> start_of_test_run():
+    <span class="kw">print</span>(<span class="str">'remove: '</span> + l_base_dir + <span class="str">'test_run'</span>)
+    shutil.rmtree(l_base_dir + <span class="str">'test_run'</span>)
+    src = l_base_dir + <span class="str">'utils\\test_run'</span>
+    dst = l_base_dir + <span class="str">'test_run'</span>
+    shutil.copytree(src, dst)
+
+
+<span class="kw">def</span> start_of_test_case(test_case_description):
+    writeTestResults(<span class="str">'test case'</span>, test_case_description, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+    <span class="kw">print</span>(<span class="str">'test case: '</span> + test_case_description)
+
+
+<span class="cmt"># IDENTITY</span>
+
+<span class="kw">def</span> logon(user, password):
+    errorhandling(<span class="str">"ABORT"</span>)
+
+    writeTestResults(<span class="str">"def logon"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, user, password, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    <span class="kw">if</span> exists(<img src="1534753764224.png" />):
+        <span class="skw">click</span>(<img src="1534753764224.png" />)
+        <span class="skw">type</span>(user)
+        writeTestResults(<span class="str">"def logon"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, user, <span class="str">""</span>, <span class="str">"user was empty"</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    <span class="kw">if</span> exists(<img src="1535029693455.png" />):
+        <span class="skw">click</span>(<img src="1535029693455.png" />)
+        <span class="skw">type</span>(user)
+        writeTestResults(<span class="str">"def logon"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, user, <span class="str">""</span>, <span class="str">"user was empty"</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    <span class="kw">if</span> exists(<img src="1534753802655.png" />):
+        <span class="skw">click</span>(<img src="1534753802655.png" />)
+        <span class="skw">type</span>(password)
+        writeTestResults(<span class="str">"def logon"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, password, <span class="str">""</span>, <span class="str">"password was empty"</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    <span class="kw">if</span> exists(<img src="1535029725687.png" />):
+        <span class="skw">click</span>(<img src="1535029725687.png" />)
+        <span class="skw">type</span>(password)
+        writeTestResults(<span class="str">"def logon"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, password, <span class="str">""</span>, <span class="str">"password was empty"</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    <span class="kw">if</span> exists(<img src="OK-6.png" />):
+        <span class="skw">click</span>(<img src="OK-6.png" />)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+
+<span class="kw">def</span> four_eyes(user, password):
+    errorhandling(<span class="str">"ABORT"</span>)
+    writeTestResults(<span class="str">"def four_eyes"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, user, password, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    general_buttons.authorization_btns_click(<span class="str">'USER'</span>)
+    <span class="skw">type</span>(user)
+    writeTestResults(<span class="str">"def logon"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, user, <span class="str">""</span>, <span class="str">"user was empty"</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    general_buttons.authorization_btns_click(<span class="str">'PASSWORD'</span>)
+    <span class="skw">type</span>(password)
+    writeTestResults(<span class="str">"def logon"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, password, <span class="str">""</span>, <span class="str">"password was empty"</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    <span class="skw">type</span>(Key.ENTER)
+
+
+<span class="kw">def</span> do_break():
+    errorhandling(<span class="str">""</span>)
+    writeTestResults(<span class="str">"def dobreak"</span>, <span class="str">"GUI"</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+
+    <span class="cmt"># click the button for the BREAK menu</span>
+    general_buttons.click_element(<span class="str">'main_page'</span>, -<span class="dig">470</span>, -<span class="dig">280</span>, <span class="str">'hamburger btn'</span>)
+    <span class="cmt"># click the BRWAK button</span>
+    general_buttons.click_element(<span class="str">'hamburger_menu'</span>, <span class="dig">0</span>, -<span class="dig">40</span>, <span class="str">'BREAK btn'</span>)
+
+
+<span class="kw">def</span> errorhandling(action):
+    max(<span class="dig">0</span>, <span class="dig">1</span>)
+    <span class="cmt"># setFindFailedResponse("ABORT")</span>
+
+
+<span class="kw">def</span> writeTestResults(business_process, test_area, test_case, test_result, test_result_value, test_result_description, reg, picture):
+    time_stamp = <span class="str">"T "</span> + time.strftime(<span class="str">"%Y%m%d-%H%M%S"</span>) + <span class="str">"-"</span> + str(datetime.now( ).microsecond)
+    file = <span class="str">""</span>
+    path = <span class="str">""</span>
+
+    <span class="kw">if</span> test_result == <span class="str">"NOK"</span>:
+        screen = Screen( )
+        file = test_result + <span class="str">"_"</span> + time_stamp + <span class="str">"_"</span> + test_case
+        path = l_base_dir + <span class="str">"test_run\\test_results\\nok\\"</span>
+        src = l_base_dir + <span class="str">"on till regression test\\test_cases.sikuli\\"</span> + picture
+        shutil.copy(src, path + file + <img src="_search_object.png" />)
+        reg = Region(screen)
+        img = <span class="skw">capture</span>(reg)  <span class="cmt"># img is an image file .png in temp folder now</span>
+        shutil.move(img, path + file + <img src="_screen.png" />)  <span class="cmt"># the target directory must exist</span>
+        test_result_value = <span class="str">"=HYPERLINK(\""</span> + path + file + <span class="str">"\")"</span>
+
+    <span class="kw">if</span> test_result == <span class="str">"OK"</span>:
+        <span class="cmt"># screen = Screen()</span>
+        file = test_result + <span class="str">"_"</span> + time_stamp + <span class="str">"_"</span> + test_case
+        path = l_base_dir + <span class="str">"test_run\\test_results\\ok\\"</span>
+        img = <span class="skw">capture</span>(reg)  <span class="cmt"># img is an image file .png in temp folder now</span>
+        shutil.move(img, path + file + <img src=".png" />)  <span class="cmt"># the target directory must exist</span>
+        test_result_value = <span class="str">"=HYPERLINK(\""</span> + path + file + <span class="str">"\")"</span>
+    f = open(tr_file, <span class="str">"a"</span>)
+    f.write(str(time_stamp) + <span class="str">","</span> + str(business_process) + <span class="str">","</span> + str(test_area) + <span class="str">","</span> + str(test_case) + <span class="str">","</span> + str(
+        test_result) + <span class="str">","</span> + str(test_result_value) + <span class="str">","</span> + str(test_result_description)  + <span class="str">","</span> + str(reg)+ <span class="str">","</span> + str(picture) + <span class="str">"\n"</span>)
+    f.close( )
+
+
+<span class="kw">def</span> fill_basket(article, number_of_articles):
+    errorhandling(<span class="str">"ABORT"</span>)
+
+    extended_wait(<span class="str">'main_page_key_pad'</span>, <span class="dig">30</span>)
+
+    <span class="cmt"># click SEARCH ITEM button</span>
+    general_buttons.main_page_key_pad_btns_click(<span class="str">'ITEM SEARCH'</span>)
+
+    <span class="cmt"># move to next line on search form</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="cmt"># article number</span>
+    <span class="skw">type</span>(str(article))
+
+    <span class="cmt"># click SEARCH button</span>
+    general_buttons.article_search_form_btns_click(<span class="str">'SEARCH'</span>)
+
+    <span class="skw">wait</span>(<span class="dig">3</span>)
+
+    <span class="cmt"># add product(s)</span>
+    z = <span class="dig">0</span>
+    <span class="kw">print</span>(<span class="str">'number of products: '</span> + str(number_of_articles))
+    <span class="kw">while</span> z &lt; number_of_articles - <span class="dig">1</span>:
+        general_buttons.click_element(<span class="str">'add_or_substract_product'</span>, <span class="dig">100</span>, <span class="dig">0</span>, <span class="str">'PLUS btn'</span>)
+        z += <span class="dig">1</span>
+        <span class="kw">print</span>(<span class="str">'z: '</span> + str(z))
+
+
+<span class="cmt"># def make_test_receipts(article, number_of_articles):</span>
+<span class="cmt">#</span>
+<span class="cmt">#     valid_receipt = False</span>
+<span class="cmt">#     while not valid_receipt:</span>
+<span class="cmt">#         fill_basket(article, number_of_articles)</span>
+<span class="cmt">#         receipt_meta_data_array = get_receipt_meta_data()</span>
+<span class="cmt">#         receipt_number = receipt_meta_data_array[0]</span>
+<span class="cmt">#         print('receipt_number: ' + receipt_number)</span>
+<span class="cmt">#         valid_receipt = receipt_number.isnumeric()</span>
+<span class="cmt">#         if valid_receipt:</span>
+<span class="cmt">#             #show_value__msg('receipt number', receipt_meta_data_array)</span>
+<span class="cmt">#             break</span>
+<span class="cmt">#         general_buttons.main_page_key_pad_btns_click('CANCEL')</span>
+<span class="cmt">#         four_eyes(l_general_test_settings[4], l_general_test_settings[5])</span>
+<span class="cmt">#         type(Key.ENTER)</span>
+<span class="cmt">#         type(Key.ENTER)</span>
+<span class="cmt">#         extended_wait('main_page_key_pad', 30)</span>
+<span class="cmt">#</span>
+<span class="cmt">#     general_buttons.main_page_key_pad_btns_click('TOTAL')</span>
+<span class="cmt">#</span>
+<span class="cmt">#     pay_transaction_with_tender([['tender', 'VISA']])</span>
+<span class="cmt">#     return receipt_number</span>
+
+
+<span class="kw">def</span> get_receipt_meta_data():
+
+    receipt_meta_data_array = [<span class="str">''</span>,<span class="str">''</span>,<span class="str">''</span>,<span class="str">''</span>,<span class="str">''</span>]
+
+
+    <span class="kw">if</span> brand == <span class="str">'CK'</span>:
+        r = Region(<span class="dig">65</span>,<span class="dig">96</span>,<span class="dig">388</span>,<span class="dig">40</span>)
+        receipt_meta_data = r.text( )
+        <span class="kw">print</span>(<span class="str">'receipt_meta_data: '</span> + receipt_meta_data)
+        r.highlight(<span class="dig">1</span>)
+        <span class="cmt">#get receipt number with E</span>
+        receipt_number1 = re.search(<span class="str">r'[E]\d+'</span>, receipt_meta_data).group()
+        <span class="cmt"># strip E</span>
+        receipt_number1 = re.search(<span class="str">r'\d+'</span>, receipt_number1).group()
+        <span class="kw">print</span>(<span class="str">'receipt number1: '</span> + receipt_number1)
+
+    r = Region(<span class="dig">91</span>,<span class="dig">90</span>,<span class="dig">30</span>,<span class="dig">40</span>)  <span class="cmt"># receipt number</span>
+    receipt_number2 = sanitize_ocr_result(r.text( ))
+    r.highlight(<span class="dig">1</span>)
+    <span class="kw">print</span>(<span class="str">'receipt number2: '</span> + receipt_number2)
+
+    <span class="kw">if</span> brand == <span class="str">'CK'</span>:
+        receipt_meta_data_array[<span class="dig">0</span>] = max(receipt_number1, receipt_number2)
+
+    <span class="kw">if</span> brand == <span class="str">'TH'</span>:
+        receipt_meta_data_array[<span class="dig">0</span>] = receipt_number2
+
+
+    r = Region(<span class="dig">146</span>,<span class="dig">90</span>,<span class="dig">27</span>,<span class="dig">40</span>)  <span class="cmt"># number of items in basket</span>
+    receipt_meta_data_array[<span class="dig">1</span>] = sanitize_ocr_result(r.text())
+    r.highlight(<span class="dig">1</span>)
+
+    r = Region(<span class="dig">206</span>,<span class="dig">90</span>,<span class="dig">38</span>,<span class="dig">40</span>)  <span class="cmt"># cashier number</span>
+    receipt_meta_data_array[<span class="dig">2</span>] = sanitize_ocr_result(r.text())
+    r.highlight(<span class="dig">1</span>)
+
+    r = Region(<span class="dig">280</span>,<span class="dig">90</span>,<span class="dig">38</span>,<span class="dig">40</span>)  <span class="cmt"># till number</span>
+    receipt_meta_data_array[<span class="dig">3</span>] = sanitize_ocr_result(r.text())
+    r.highlight(<span class="dig">1</span>)
+
+    r = Region(<span class="dig">333</span>,<span class="dig">90</span>,<span class="dig">113</span>,<span class="dig">40</span>)  <span class="cmt"># date and time</span>
+    receipt_meta_data_array[<span class="dig">4</span>] = sanitize_ocr_result(r.text())
+    r.highlight(<span class="dig">1</span>)
+
+    <span class="cmt"># writeTestResults('receipt data temp', '', '', str(receipt_meta_data_array), '', '', '', '')</span>
+    <span class="kw">if</span> len(receipt_meta_data_array) &gt;= <span class="dig">5</span>:
+        writeTestResults(<span class="str">'receipt data'</span>, <span class="str">''</span>, <span class="str">''</span>, str(receipt_meta_data_array[<span class="dig">0</span>]), str(receipt_meta_data_array[<span class="dig">1</span>]), str(receipt_meta_data_array[<span class="dig">2</span>]), str(receipt_meta_data_array[<span class="dig">3</span>]), str(receipt_meta_data_array[<span class="dig">4</span>]))
+    <span class="kw">else</span>:
+        writeTestResults(<span class="str">'receipt data'</span>, <span class="str">''</span>, <span class="str">'NO VALID RECEIPT DATA'</span>, <span class="str">''</span>, str(receipt_meta_data_array), <span class="str">''</span>, <span class="str">''</span>, <span class="str">''</span>)
+
+    <span class="cmt"># receipt_meta_data_array[0] = str(receipt_number)</span>
+
+    <span class="kw">return</span> receipt_meta_data_array
+
+
+<span class="kw">def</span> sanitize_ocr_result(ocr_result):
+    <span class="cmt"># sanitize data</span>
+    <span class="cmt"># print('ocr_result: ' + ocr_result)</span>
+    resulting_text = ocr_result.replace(<span class="str">" "</span>, <span class="str">""</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"d"</span>, <span class="str">"0"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"D"</span>, <span class="str">"0"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"c"</span>, <span class="str">"0"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"C"</span>, <span class="str">"0"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"|j"</span>, <span class="str">"0"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"LEI!)"</span>, <span class="str">"99"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"2C|"</span>, <span class="str">"20"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"_r:I|I"</span>, <span class="str">"80"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"_r:I|I"</span>, <span class="str">"80"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"I5"</span>, <span class="str">"15"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+    resulting_text = resulting_text.replace(<span class="str">"OI"</span>, <span class="str">"01"</span>)
+    <span class="cmt"># print('resulting_text: ' + resulting_text)</span>
+
+    <span class="kw">return</span> resulting_text
+
+
+<span class="cmt"># PAYMENTS</span>
+
+<span class="kw">def</span> pay_transaction_with_tender(payment_data_items):
+
+    <span class="str">'''
+
+    payment_data_items example
+      DESCRIPTION    VALUE
+      1              2
+    [['tender',     'VISA'                  ],
+     ['amount', '10.00'                        ]
+     ['tender',     'cash'                  ],
+     [gv_number'    '999A34010119003084001' ]]
+    '''</span>
+
+    <span class="cmt"># number of tenders to pay with</span>
+
+    offline_card = [<span class="str">'VISA'</span>, <span class="str">'MASTERCARD'</span>, <span class="str">'MAESTRO'</span>, <span class="str">'AMEX'</span>, <span class="str">'CHINA UNION PAY'</span>, <span class="str">'DINERS'</span>,<span class="str">'ALIPAY'</span>, <span class="str">'WECHAT'</span>, <span class="str">'BREUNINGER'</span>]
+
+    receipt_meta_data_array = get_receipt_meta_data()
+
+    <span class="cmt"># number_of_tenders-to_pay_with = get_number_of_tenders(payment_data_items)</span>
+
+    tender = get_payment_data(payment_data_items, <span class="str">'tender'</span>)
+
+    <span class="cmt"># number_of_tenders = get_number_of_tenders(payment_data_items)</span>
+
+    <span class="kw">if</span> tender <span class="kw">in</span> offline_card:
+        general_buttons.payment_page_footer_menu_btns_click(<span class="str">'OTHER TENDERS'</span>)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        general_buttons.payment_page_other_tenders_menu_btns_click(<span class="str">'OFFLINE CARD'</span>)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        general_buttons.payment_page_other_tenders_offline_card_menu_btns_click(tender)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="skw">type</span>(Key.ENTER)
+
+    <span class="kw">if</span> tender == <span class="str">'gift_voucher'</span>:
+        general_buttons.payment_page_footer_menu_btns_click(<span class="str">'OTHER TENDERS'</span>)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        general_buttons.payment_page_other_tenders_menu_btns_click(<span class="str">'GIFT VOUCHER'</span>)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        gv_number = get_payment_data(payment_data_items, <span class="str">'gv_number'</span>)
+
+        <span class="kw">if</span> brand == <span class="str">"CK"</span>:
+            pause_test_case_msg()
+        <span class="kw">if</span> brand == <span class="str">"TH"</span>:
+            <span class="skw">type</span>(gv_number)
+
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="cmt"># type(Key.ENTER)</span>
+
+    <span class="kw">if</span> tender == <span class="str">'zalando'</span>:
+        general_buttons.payment_page_footer_menu_btns_click(<span class="str">'OTHER TENDERS'</span>)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        general_buttons.payment_page_other_tenders_menu_btns_click(<span class="str">'ZALANDO'</span>)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        zalando_number = get_payment_data(payment_data_items, <span class="str">'zalando_number'</span>)
+        <span class="skw">type</span>(zalando_number)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        <span class="skw">type</span>(Key.ENTER)
+
+    <span class="kw">if</span> tender == <span class="str">'franchise_retoure_post'</span>:
+        general_buttons.payment_page_footer_menu_btns_click(<span class="str">'OTHER TENDERS'</span>)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        general_buttons.payment_page_other_tenders_menu_btns_click(<span class="str">'FRANCHISE / RETOURE POST'</span>)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        frp_number = get_payment_data(payment_data_items, <span class="str">'frp_number'</span>)
+        frp_amount = get_payment_data(payment_data_items, <span class="str">'frp_amount'</span>)
+        <span class="skw">type</span>(frp_number)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        <span class="skw">type</span>(frp_amount)
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        <span class="skw">type</span>(Key.ENTER)
+        pay_transaction_with_tender([[<span class="str">'tender'</span>, <span class="str">'DINERS'</span>]])
+
+    <span class="kw">if</span> tender == <span class="str">'online_card'</span>:
+        general_buttons.pay_out_key_pad_click([[<span class="str">'tender'</span>, <span class="str">'card'</span>]])
+        <span class="skw">wait</span>(<span class="dig">0.5</span>)
+        <span class="skw">type</span>(Key.ENTER)
+
+        general_message(<span class="str">'pay manually with online card and the Adyen terminal. Click OK once your done paying to resume the automated test run'</span>)
+
+    <span class="kw">if</span> tender == <span class="str">'cash'</span>:
+
+        general_buttons.pay_out_key_pad_click(<span class="str">'CASH'</span>)
+        <span class="skw">type</span>(Key.ENTER)
+        close_drawer_msg()
+
+
+<span class="kw">def</span> get_number_of_tenders(payment_data_items):
+    number_of_tenders = <span class="dig">0</span>
+    <span class="kw">for</span> payment_data_item <span class="kw">in</span> payment_data_items:
+        <span class="kw">print</span>(<span class="str">'payment_data_item: '</span> + str(payment_data_item))
+        <span class="kw">if</span> payment_data_item[<span class="dig">0</span>] == <span class="str">'tender'</span>:
+                number_of_tenders +=<span class="dig">1</span>
+
+    <span class="kw">if</span> number_of_tenders == <span class="dig">0</span>:
+        general_message(<span class="str">'There is no tender specified to pay with. You have to enter one manually'</span>)
+
+    <span class="kw">return</span> number_of_tenders
+
+
+<span class="kw">def</span> get_payment_data(payment_data_items, data_item):
+    <span class="kw">for</span> payment_data_item <span class="kw">in</span> payment_data_items:
+        <span class="kw">print</span>(<span class="str">'payment_data_item: '</span> + str(payment_data_item))
+        <span class="kw">if</span> payment_data_item[<span class="dig">0</span>] == data_item:
+                <span class="kw">return</span> payment_data_item[<span class="dig">1</span>]
+
+
+<span class="cmt"># SEARCH ARTICLES</span>
+
+<span class="cmt"># def add_article_via_search_form(article, number_of_articles):</span>
+<span class="cmt">#     time.sleep(5)</span>
+<span class="cmt">#     # click SEARCH ITEM button</span>
+<span class="cmt">#     general_buttons.click_element('main_page_key_pad', 200, -40, 'search item btn')</span>
+<span class="cmt">#</span>
+<span class="cmt">#     sleep(2)</span>
+<span class="cmt">#</span>
+<span class="cmt">#     # move to next line on form</span>
+<span class="cmt">#     type(Key.ENTER)</span>
+<span class="cmt">#</span>
+<span class="cmt">#     # article number</span>
+<span class="cmt">#     type(str(y[0]))</span>
+<span class="cmt">#</span>
+<span class="cmt">#     # click SEARCH button</span>
+<span class="cmt">#     general_buttons.click_element('article_search_form', 300, 40, 'search btn')</span>
+<span class="cmt">#</span>
+<span class="cmt">#     # general_functions.get_receipt_and_transaction_data()</span>
+<span class="cmt">#</span>
+<span class="cmt">#     # add product(s)</span>
+<span class="cmt">#     z = 0</span>
+<span class="cmt">#     while z &lt; y[1] - 1:</span>
+<span class="cmt">#         general_buttons.click_element('add_or_substract_product', 100, 0, 'PLUS btn')</span>
+<span class="cmt">#         z += 1</span>
+<span class="cmt">#         general_functions.get_receipt_and_transaction_data( )</span>
+
+
+<span class="cmt"># FLOW AND TIMING</span>
+
+<span class="kw">def</span> extended_wait(element, max_sec_wait):
+
+    picture = element + <span class="str">'_'</span> + locale + <span class="str">'_'</span> + brand + <img src=".png" />
+    the_complete_picture = l_base_dir + <span class="str">'on till regression test\\screen_prints\\'</span> + picture
+
+    <span class="cmt"># print('hier: ' + the_complete_picture)</span>
+
+    <span class="cmt"># is there a localized version  of the picture, if not use the general version</span>
+    <span class="kw">if</span> os.path.isfile(the_complete_picture):
+        <span class="kw">print</span>(<span class="str">'local version exists: '</span> + picture)
+    <span class="kw">else</span>:
+        picture = l_base_dir + <span class="str">'on till regression test\\screen_prints\\'</span> + element + <span class="str">'_'</span> + brand + <img src=".png" />
+        <span class="cmt"># print('local version does NOT exist: ' + picture)</span>
+
+    <span class="kw">print</span>(<span class="str">"picture we're trying to find: : "</span> + picture)
+
+    <span class="skw">wait</span>(picture, max_sec_wait)
+
+
+<span class="cmt"># MESSAGES</span>
+
+<span class="kw">def</span> general_message(message):
+    <span class="skw">popup</span>(message)
+
+<span class="kw">def</span> close_drawer_msg():
+    <span class="skw">popup</span>(<span class="str">"close the drawer and click OK to resume the test"</span>, <span class="str">"close the drawer"</span>)
+
+
+<span class="kw">def</span> end_of_day_msg():
+    <span class="skw">popup</span>(<span class="str">"close the drawer, perform end of day in GK Portal and click OK to resume the test"</span>, <span class="str">"close the drawer"</span>)
+
+
+<span class="kw">def</span> check_screen_msg():
+    <span class="skw">popup</span>(<span class="str">"click OK to resume the test"</span>, <span class="str">"check screen"</span>)
+
+
+<span class="kw">def</span> end_of_test_case_msg():
+    <span class="skw">popup</span>(<span class="str">"test has run without problems, click OK to proceed"</span>, <span class="str">"test has run"</span>)
+
+
+<span class="kw">def</span> pause_test_case_msg():
+    <span class="skw">popup</span>(<span class="str">"test executions is paused. You can restart by clicking OK"</span>, <span class="str">"test execution paused"</span>)
+
+<span class="kw">def</span> show_value__msg(message, data_value):
+    <span class="skw">popup</span>(message + <span class="str">': '</span> + str(data_value), <span class="str">"test execution paused"</span>)
+
+<span class="cmt"># AREAS</span>
+
+<span class="kw">def</span> get_key_pad_area():
+    KEY_PAD_AREA = test_settings.constants(<span class="str">'KEY_PAD_AREA'</span>)
+    <span class="kw">print</span>(<span class="str">'KEY_PAD_AREA: '</span> + str(KEY_PAD_AREA))
+    r = Region(KEY_PAD_AREA[<span class="dig">1</span>], KEY_PAD_AREA[<span class="dig">2</span>], KEY_PAD_AREA[<span class="dig">3</span>], KEY_PAD_AREA[<span class="dig">4</span>])
+    <span class="kw">return</span> r
+
+
+<span class="kw">def</span> get_menu_buttons_area():
+    MENU_BUTTONS_AREA = test_settings.constants(<span class="str">'MENU_BUTTONS_AREA'</span>)
+    <span class="kw">print</span>(<span class="str">'MENU_BUTTONS_AREA: '</span> + str(MENU_BUTTONS_AREA))
+    r = Region(MENU_BUTTONS_AREA[<span class="dig">1</span>], MENU_BUTTONS_AREA[<span class="dig">2</span>], MENU_BUTTONS_AREA[<span class="dig">3</span>], MENU_BUTTONS_AREA[<span class="dig">4</span>])
+    <span class="kw">return</span> r
+
+
+<span class="kw">def</span> get_footer_menu_area():
+    FOOTER_MENU_AREA = test_settings.constants(<span class="str">'FOOTER_MENU_AREA'</span>)
+    <span class="kw">print</span>(<span class="str">'FOOTER_MENU_AREA: '</span> + str(FOOTER_MENU_AREA))
+    r = Region(FOOTER_MENU_AREA[<span class="dig">1</span>], FOOTER_MENU_AREA[<span class="dig">2</span>], FOOTER_MENU_AREA[<span class="dig">3</span>], FOOTER_MENU_AREA[<span class="dig">4</span>])
+    <span class="kw">return</span> r
+
+
+<span class="kw">def</span> get_hamburger_btn_area():
+    HAMBURGER_BUTTON_AREA = test_settings.constants(<span class="str">'HAMBURGER_BUTTON_AREA'</span>)
+    <span class="kw">print</span>(<span class="str">'HAMBURGER_BUTTON_AREA: '</span> + str(HAMBURGER_BUTTON_AREA))
+    r = Region(HAMBURGER_BUTTON_AREA[<span class="dig">1</span>], HAMBURGER_BUTTON_AREA[<span class="dig">2</span>], HAMBURGER_BUTTON_AREA[<span class="dig">3</span>], HAMBURGER_BUTTON_AREA[<span class="dig">4</span>])
+    <span class="kw">return</span> r
+
+
+<span class="kw">def</span> get_hamburger_menu_area():
+    HAMBURGER_MENU_AREA = test_settings.constants(<span class="str">'HAMBURGER_MENU_AREA'</span>)
+    <span class="kw">print</span>(<span class="str">'HAMBURGER_MENU_AREA: '</span> + str(HAMBURGER_MENU_AREA))
+    r = Region(HAMBURGER_MENU_AREA[<span class="dig">1</span>], HAMBURGER_MENU_AREA[<span class="dig">2</span>], HAMBURGER_MENU_AREA[<span class="dig">3</span>], HAMBURGER_MENU_AREA[<span class="dig">4</span>])
+    <span class="kw">return</span> r
+
+
+<span class="kw">def</span> get_take_over_area():
+    TAKE_OVER_AREA = test_settings.constants(<span class="str">'TAKE_OVER_AREA'</span>)
+    <span class="kw">print</span>(<span class="str">'TAKE_OVER_AREA: '</span> + str(TAKE_OVER_AREA))
+    r = Region(TAKE_OVER_AREA[<span class="dig">1</span>], TAKE_OVER_AREA[<span class="dig">2</span>], TAKE_OVER_AREA[<span class="dig">3</span>], TAKE_OVER_AREA[<span class="dig">4</span>])
+    <span class="kw">return</span> r
+
+<span class="cmt"># END</span>
+
+<span class="kw">def</span> end_of_test_case():
+    clean_up_after_test()
+    writeTestResults(<span class="str">" "</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+    <span class="cmt"># end_of_test_case_msg()</span>
+
+<span class="kw">def</span> clean_up_after_test():
+    <span class="cmt">#f.close()</span>
+    <span class="kw">print</span>(<span class="str">'test ended correctly'</span>)
+
+<span class="kw">def</span> end_of_test_run():
+    <span class="cmt"># save test run directory with time stamp</span>
+    time_stamp = <span class="str">"T "</span> + time.strftime(<span class="str">"%Y%m%d-%H%M%S"</span>)
+    <span class="cmt"># time_stamp = "T " + time.strftime("%Y%m%d-%H%M%S") + "-" + str(datetime.now( ).microsecond) # time stamp with micro seconds</span>
+    src = l_base_dir + <span class="str">'test_run'</span>
+    dst = l_base_dir + time_stamp + <span class="str">'_test_run'</span>
+    shutil.copytree(src, dst)
+</pre>
+</body>
+</html>

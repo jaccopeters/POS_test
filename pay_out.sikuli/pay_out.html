@@ -1,0 +1,144 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>pay_out.sikuli</h2> <a href="pay_out.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> general_buttons
+<span class="kw">import</span> test_cases
+<span class="kw">import</span> test_settings
+
+
+
+<span class="kw">def</span> pay_out():
+    general_functions.errorhandling(<span class="str">"ABORT"</span>)
+    l_general_test_settings = test_settings.general_test_settings()
+
+    <span class="kw">for</span> z <span class="kw">in</span> range(<span class="dig">0</span>, <span class="dig">9</span>):
+        general_buttons.click_element(<span class="str">'main_page_footer_menu'</span>, <span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'OTHER btn'</span>)
+        general_buttons.click_element(<span class="str">'main_page_other_menu'</span>, -<span class="dig">70</span>, <span class="dig">70</span>, <span class="str">'PAY OUT btn'</span>)
+
+        <span class="cmt"># four eyes authorization</span>
+        general_functions.four_eyes(l_general_test_settings[<span class="dig">4</span>], l_general_test_settings[<span class="dig">5</span>])
+
+        x = <span class="dig">0</span>
+        y = <span class="dig">0</span>
+        <span class="cmt"># different countries have different types and numbers of pay out reasons</span>
+        <span class="kw">if</span> l_general_test_settings[<span class="dig">8</span>] == <span class="str">'en_GB'</span>:
+            y = (z * <span class="dig">48</span>) - <span class="dig">110</span>
+        <span class="kw">if</span> l_general_test_settings[<span class="dig">8</span>] == <span class="str">'de_DE'</span>:
+            y = (z * <span class="dig">48</span>) - <span class="dig">200</span>
+
+        <span class="cmt"># select pay out reason</span>
+        general_buttons.click_element(<span class="str">'pay_in_and_pay_out_reasons'</span>, x, y, <span class="str">'pay out reason btn'</span>)
+
+        <span class="cmt"># confirm reason</span>
+        <span class="skw">type</span>(Key.ENTER)
+
+        <span class="cmt"># amount that's payed out</span>
+        <span class="skw">type</span>(str(z) + <span class="str">"1.00"</span>)
+
+        <span class="cmt"># confirm amount</span>
+        <span class="skw">type</span>(Key.ENTER)
+
+        <span class="cmt"># click CASH button</span>
+        general_buttons.click_element(<span class="str">'basket_page_key_pad_and_footer_menu'</span>, <span class="dig">120</span>, -<span class="dig">180</span>, <span class="str">'CASH btn'</span>)
+
+        <span class="cmt"># confirm pay in</span>
+        <span class="skw">type</span>(Key.ENTER)
+
+        z =+ <span class="dig">1</span>
+
+    general_buttons.click_element(<span class="str">'main_page_footer_menu'</span>, <span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'OTHER btn'</span>)
+    general_buttons.click_element(<span class="str">'main_page_other_menu'</span>, -<span class="dig">70</span>, <span class="dig">70</span>, <span class="str">'PAY OUT btn'</span>)
+
+    <span class="cmt"># four eyes authorization</span>
+    general_functions.four_eyes(l_general_test_settings[<span class="dig">4</span>], l_general_test_settings[<span class="dig">5</span>])
+
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="cmt"># confirm reason</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="cmt"># amount that's payed out</span>
+    <span class="skw">type</span>(<span class="str">"9.99"</span>)
+
+    <span class="cmt"># confirm amount</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="cmt"># click CASH button</span>
+    general_buttons.click_element(<span class="str">'basket_page_key_pad_and_footer_menu'</span>, <span class="dig">120</span>, -<span class="dig">220</span>, <span class="str">'CANCEL TRANSACTION btn'</span>)
+
+    <span class="cmt"># four eyes authorization</span>
+    general_functions.four_eyes(l_general_test_settings[<span class="dig">4</span>], l_general_test_settings[<span class="dig">5</span>])
+</pre>
+</body>
+</html>

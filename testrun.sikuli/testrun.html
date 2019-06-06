@@ -1,0 +1,277 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>testrun.sikuli</h2> <a href="testrun.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># general modules</span>
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> time
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> string
+
+<span class="cmt"># test modules</span>
+<span class="kw">import</span> gui_screens
+<span class="kw">import</span> drop_off
+<span class="kw">import</span> pay_in
+<span class="kw">import</span> pay_out
+<span class="kw">import</span> item_not_found
+<span class="kw">import</span> void_line_item
+<span class="kw">import</span> basic_sale
+<span class="kw">import</span> basic_sale_chf_eur
+<span class="kw">import</span> cancel_receipt
+<span class="kw">import</span> non_merchandise_sale
+<span class="kw">import</span> manual_discount_li
+<span class="kw">import</span> manual_discount_tr
+<span class="kw">import</span> returns_with_receipt
+<span class="kw">import</span> returns_without_receipt
+<span class="kw">import</span> price_override
+<span class="kw">import</span> local_employee_discount
+<span class="kw">import</span> fms_promotions_and_markdowns
+<span class="kw">import</span> check_GUI_elements
+<span class="kw">import</span> gv_sale_and_redemption
+<span class="kw">import</span> loyalty_number
+<span class="kw">import</span> gift_receipt
+<span class="kw">import</span> commission_sale
+<span class="kw">import</span> remove_promotion
+
+<span class="kw">global</span> l_general_test_settings
+l_general_test_settings = test_settings.general_test_settings( )
+<span class="kw">global</span> locale
+locale = l_general_test_settings[<span class="dig">8</span>]
+l_base_dir = l_general_test_settings[<span class="dig">10</span>]
+<span class="kw">global</span> brand
+brand = l_general_test_settings[<span class="dig">6</span>]
+
+<span class="kw">global</span> l_test_settings
+l_test_settings = test_settings.basic_sale_off_line_card_test_settings(locale)
+
+myScriptPath = l_base_dir + <span class="str">"on till regression test"</span>
+<span class="kw">if</span> <span class="kw">not</span> myScriptPath <span class="kw">in</span> sys.path:
+    sys.path.append(myScriptPath)
+    <span class="kw">print</span>(<span class="str">"NOT PRESENT "</span> + myScriptPath)
+
+
+<span class="kw">def</span> tc_gui():
+    gui_screens.basic_gui_check()
+
+<span class="kw">def</span> tc_drop_off():
+    drop_off.drop_off( )
+
+
+<span class="kw">def</span> tc_pay_in():
+    pay_in.pay_in( )
+
+
+<span class="kw">def</span> tc_pay_out():
+    pay_out.pay_out( )
+
+
+<span class="kw">def</span> make_receipts():
+    pre_make_receipts.temp( )
+
+
+<span class="kw">def</span> tc_item_not_found():
+    item_not_found.item_not_found( )
+
+
+<span class="kw">def</span> tc_basic_sale():
+    basic_sale.basic_sale_off_line_card( )
+
+
+<span class="kw">def</span> tc_basic_sale_chf_eur():
+    basic_sale_chf_eur.basic_sale_chf_to_eur( )
+
+
+<span class="kw">def</span> tc_void_line_item():
+    void_line_item.void_line_item( )
+
+
+<span class="kw">def</span> tc_cancel_receipt():
+    cancel_receipt.cancel_receipt( )
+
+
+<span class="kw">def</span> tc_non_merchandise_sale():
+    non_merchandise_sale.non_merchandise_sale( )
+
+
+<span class="kw">def</span> tc_manual_discount_li():
+    manual_discount_li.manual_discount_li( )
+
+
+<span class="kw">def</span> tc_manual_discount_tr():
+    manual_discount_tr.manual_discount_tr( )
+
+
+<span class="kw">def</span> tc_returns_with_receipt():
+    returns_with_receipt.returns_with_receipt( )
+
+
+<span class="kw">def</span> tc_returns_with_receipt_and_exchange():
+    returns_with_receipt.returns_with_receipt_and_exchange()
+
+
+<span class="kw">def</span> tc_returns_without_receipt():
+    returns_without_receipt.returns_with_out_receipt_item_not_found( )
+
+
+<span class="kw">def</span> tc_returns_without_receipt_with_loyalty_number():
+    returns_without_receipt.with_loyalty_number( )
+
+
+<span class="kw">def</span> tc_returns_with_out_receipt_item_not_found_and_exchange():
+    returns_without_receipt.returns_with_out_receipt_item_not_found_and_exchange()
+
+
+<span class="kw">def</span> tc_price_override():
+    price_override.price_override( )
+
+
+<span class="kw">def</span> tc_local_employee_discount():
+    local_employee_discount.local_employee_discount_line_item(<span class="dig">0</span>)
+    local_employee_discount.local_employee_discount_line_item(<span class="dig">1</span>)
+    local_employee_discount.local_employee_discount_transaction(<span class="dig">2</span>)
+    local_employee_discount.local_employee_discount_transaction(<span class="dig">3</span>)
+    local_employee_discount.local_employee_discount_remove_employee(<span class="dig">4</span>)
+    local_employee_discount.local_employee_discount_remove_line_item_discount(<span class="dig">5</span>)
+    local_employee_discount.local_employee_discount_remove_transaction_discount(<span class="dig">6</span>)
+
+
+<span class="kw">def</span> tc_fms_promotions_and_markdowns():
+    <span class="cmt">#fms_promotions_and_markdowns.promotions( )</span>
+    fms_promotions_and_markdowns.bonus_buys( )
+
+
+<span class="kw">def</span> tc_check_GUI_elements():
+    check_GUI_elements.screens( )
+
+<span class="kw">def</span> tc_gv_sale_and_redemption():
+    gv_sale_and_redemption.gv_sale()
+
+
+<span class="kw">def</span> tc_loyalty_number():
+    loyalty_number.add( )
+    loyalty_number.remove( )
+    loyalty_number.search( )
+    loyalty_number.suspend( )
+
+
+<span class="kw">def</span> tc_gift_receipt():
+    gift_receipt.gift_receipt_from_line_items( )
+    gift_receipt.gift_receipt_from_transaction( )
+
+
+<span class="kw">def</span> tc_commission_sale():
+    commission_sale.line_items( )
+    commission_sale.transaction( )
+
+
+<span class="kw">def</span> tc_remove_promotion():
+    remove_promotion.remove( )
+
+
+general_functions.start_of_test_run( )
+
+<span class="cmt">#tc_eod()</span>
+<span class="cmt">#tc break transactions</span>
+<span class="cmt">#tc_control_transactions()</span>
+<span class="cmt">#tc_gui()</span>
+<span class="cmt">#OK#tc_drop_off()</span>
+<span class="cmt">#OK#tc_pay_out()</span>
+<span class="cmt">#OK#tc_pay_in()</span>
+<span class="cmt">#OK#tc_basic_sale()</span>
+<span class="cmt">#NOK#tc_basic_sale_chf_eur() #NEW SCRIPT worked; now something with virtual drawer: no pop-up to close it!</span>
+<span class="cmt">#OK#tc_item_not_found()</span>
+<span class="cmt">#OK#tc_void_line_item() #1xNOK# 1x no OK folder</span>
+<span class="cmt">#OK#tc_cancel_receipt()</span>
+<span class="cmt">#OK#tc_non_merchandise_sale()</span>
+<span class="cmt">#OK#tc_manual_discount_li() #1xNOK# internet ecom interuption</span>
+<span class="cmt">#OK#tc_manual_discount_tr()</span>
+<span class="cmt">#NOK#tc_returns_with_receipt() #2xNOK# broke on 1st part; due to: 'module' object has no attribute 'make_test_receipts' </span>
+<span class="cmt">#NOK#tc_returns_with_receipt_and_exchange() #1xNOK# broke on 1st part; due to: 'module' object has no attribute 'make_test_receipts'</span>
+<span class="cmt"># if brand == "TH":</span>
+    <span class="cmt"># tc_returns_without_receipt_with_loyalty_number()</span>
+<span class="cmt">#NOK#tc_returns_without_receipt() #2xNOK# C:\Users\31000Pos\AppData\Roaming\Sikulix\Lib\sikuli\Sikuli.py", line 69, in wait return SCREEN.wait(target, timeout) Line 2782, in file Region.java</span>
+<span class="cmt">#NOK#tc_returns_with_out_receipt_item_not_found_and_exchange() #1xNOK# C:\Users\31000Pos\AppData\Roaming\Sikulix\Lib\sikuli\Sikuli.py", line 69, in wait return SCREEN.wait(target, timeout) Line 2782, in file Region.java</span>
+<span class="cmt">#OK#tc_price_override()</span>
+<span class="cmt">#NOK#tc_local_employee_discount() #2xNOK# due to webservice outage (see snippet) C:\Users\31000Pos\AppData\Roaming\Sikulix\Lib\sikuli\Sikuli.py", line 69, in wait return SCREEN.wait(target, timeout) Line 2782, in file Region.java</span>
+<span class="cmt">#OK#tc_fms_promotions_and_markdowns()</span>
+<span class="cmt">#OK#tc_gv_sale_and_redemption()</span>
+<span class="cmt"># if brand == "TH":</span>
+    <span class="cmt"># tc_loyalty_number()</span>
+<span class="cmt">#NOK#tc_gift_receipt() #2xNOK# gift_receipt ... no attribute 'make_test_receipts' + Capture Karte noch nicht gultig</span>
+<span class="cmt">#OK#tc_commission_sale()</span>
+<span class="cmt">#NOK#tc_remove_promotion() #3xNOK# remove_promotion ... FindFailed: basket_page_discounts_menu + 2x no attribute 'pay_with_off_line_card'</span>
+
+general_functions.end_of_test_run()
+</pre>
+</body>
+</html>

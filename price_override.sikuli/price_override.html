@@ -1,0 +1,117 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>price_override.sikuli</h2> <a href="price_override.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> general_buttons
+<span class="kw">import</span> test_cases
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> time
+<span class="kw">import</span> string
+
+
+<span class="kw">global</span> l_general_test_settings
+l_general_test_settings = test_settings.general_test_settings()
+<span class="kw">global</span> locale
+locale = l_general_test_settings[<span class="dig">8</span>]
+<span class="kw">global</span> l_base_dir
+l_base_dir = l_general_test_settings[<span class="dig">10</span>]
+<span class="kw">global</span> l_test_settings
+l_test_settings = test_settings.price_override(locale)
+
+<span class="kw">def</span> price_override():
+
+    general_functions.fill_basket(l_test_settings[<span class="dig">0</span>], l_test_settings[<span class="dig">1</span>])
+
+    <span class="cmt"># decrease price of first article </span>
+    <span class="skw">click</span>(Location(<span class="dig">256</span>, <span class="dig">188</span>)) <span class="cmt"># first article</span>
+    general_buttons.click_element(<span class="str">'basket_page_end_editing_key_pad'</span>, <span class="dig">100</span>, -<span class="dig">40</span>, <span class="str">'price override btn'</span>)
+    <span class="skw">type</span>(<span class="str">'44,90'</span>) <span class="cmt"># given new price</span>
+    <span class="skw">type</span>(Key.ENTER) <span class="cmt"># confirm</span>
+    <span class="skw">type</span>(Key.ENTER) <span class="cmt"># select &amp; confirm price override reason</span>
+
+    <span class="cmt"># increase price of second item</span>
+    <span class="skw">click</span>(Location(<span class="dig">256</span>, <span class="dig">188</span>))  <span class="cmt"># first article</span>
+    general_buttons.click_element(<span class="str">'basket_page_end_editing_key_pad'</span>, <span class="dig">100</span>, -<span class="dig">40</span>, <span class="str">'price override btn'</span>)
+    <span class="skw">type</span>(<span class="str">'64,90'</span>) <span class="cmt"># given new price</span>
+    <span class="skw">type</span>(Key.ENTER) <span class="cmt"># confirm</span>
+    <span class="skw">type</span>(Key.DOWN) <span class="cmt"># select price override reason</span>
+    <span class="skw">type</span>(Key.ENTER) <span class="cmt"># confirm price override reason</span>
+
+    test_cases.price_override_tc_0010(<span class="str">"are the override amounts OK?"</span>)
+
+    general_functions.pay_transaction()
+
+    general_functions.end_of_test_case()
+</pre>
+</body>
+</html>

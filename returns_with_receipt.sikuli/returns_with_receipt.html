@@ -1,0 +1,194 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>returns_with_receipt.sikuli</h2> <a href="returns_with_receipt.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> general_buttons
+<span class="kw">import</span> test_cases
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> time
+<span class="kw">import</span> string
+
+
+<span class="kw">global</span> l_general_test_settings
+l_general_test_settings = test_settings.general_test_settings()
+<span class="kw">global</span> locale
+locale = l_general_test_settings[<span class="dig">8</span>]
+<span class="kw">global</span> l_base_dir
+l_base_dir = l_general_test_settings[<span class="dig">10</span>]
+<span class="kw">global</span> l_test_settings
+l_test_settings = test_settings.returns(locale)
+
+<span class="kw">def</span> returns_with_receipt():
+    returns_with_receipt_return_items()
+    general_functions.pay_transaction()
+    general_functions.end_of_test_case()
+
+
+<span class="kw">def</span> returns_with_receipt_and_exchange():
+    returns_with_receipt_return_items()
+    <span class="cmt"># click SEARCH ITEM button</span>
+    general_buttons.click_element(<span class="str">'secondary_pages_key_pad'</span>, <span class="dig">200</span>, -<span class="dig">40</span>, <span class="str">'search item btn'</span>)
+    <span class="cmt"># move to next line on search form</span>
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="cmt"># article number</span>
+    <span class="skw">type</span>(l_test_settings[<span class="dig">0</span>])
+    <span class="cmt"># click SEARCH button</span>
+    <span class="cmt"># article_search_form_en_GB.png"</span>
+    general_buttons.click_element(<span class="str">'article_search_form'</span>, <span class="dig">300</span>, <span class="dig">40</span>, <span class="str">'search btn'</span>)
+    <span class="cmt"># add product(s)</span>
+    z = <span class="dig">0</span>
+    <span class="kw">print</span>(<span class="str">'number of products: '</span> + str(l_test_settings[<span class="dig">1</span>]))
+    <span class="kw">while</span> z &lt; l_test_settings[<span class="dig">1</span>] - <span class="dig">1</span>:
+        general_buttons.click_element(<span class="str">'add_or_substract_product'</span>, <span class="dig">100</span>, <span class="dig">0</span>, <span class="str">'PLUS btn'</span>)
+        z += <span class="dig">1</span>
+        <span class="kw">print</span>(<span class="str">'z: '</span> + str(z))
+    general_functions.pay_transaction()
+    general_functions.end_of_test_case()
+
+
+<span class="kw">def</span> returns_with_receipt_return_items():
+    general_functions.errorhandling(<span class="str">"ABORT"</span>)
+
+    x = <span class="dig">0</span>
+    <span class="kw">while</span> x &lt; <span class="dig">1</span>:
+        general_buttons.click_element(<span class="str">'main_page_items_GV_menu'</span>, -<span class="dig">70</span>, -<span class="dig">70</span>, <span class="str">'RETURNS WITH RECEIPT btn'</span>)
+
+        l_receipt = get_receipt_data()
+        <span class="kw">print</span>(<span class="str">'l_receipt: '</span> + str(l_receipt))
+        a_receipt = l_receipt.split(<span class="str">','</span>)
+
+        <span class="skw">sleep</span>(<span class="dig">5</span>)
+
+        <span class="skw">type</span>(l_general_test_settings[<span class="dig">1</span>])  <span class="cmt"># store</span>
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="cmt"># type('a_receipt: ' + str(a_receipt[3][1:8]))</span>
+        <span class="cmt"># type(a_receipt[3][1:8])  # receipt date</span>
+        <span class="cmt"># type(Key.ENTER)</span>
+        <span class="skw">type</span>(l_general_test_settings[<span class="dig">7</span>])  <span class="cmt"># till</span>
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="kw">print</span>(str(a_receipt[<span class="dig">0</span>]))
+        <span class="skw">type</span>(a_receipt[<span class="dig">0</span>])  <span class="cmt"># receipt#</span>
+        <span class="skw">type</span>(Key.ENTER)  <span class="cmt"># confirm receipt</span>
+
+        <span class="skw">sleep</span>(<span class="dig">5</span>)
+
+        <span class="skw">click</span>(Location(<span class="dig">250</span>, <span class="dig">210</span>))
+        <span class="skw">wait</span>(<span class="str">'return_reasons_'</span> + locale + <span class="str">'.png'</span>, <span class="dig">30</span>)
+        general_buttons.click_element(<span class="str">'return_reasons'</span>, -<span class="dig">70</span>, -<span class="dig">165</span>, <span class="str">'select return reason'</span>)
+        <span class="skw">type</span>(Key.ENTER)
+
+        <span class="skw">click</span>(Location(<span class="dig">250</span>, <span class="dig">350</span>))
+        <span class="skw">wait</span>(<span class="str">'return_reasons_'</span> + locale + <span class="str">'.png'</span>, <span class="dig">30</span>)
+        general_buttons.click_element(<span class="str">'return_reasons'</span>, -<span class="dig">70</span>, -<span class="dig">120</span>, <span class="str">'select return reason'</span>)
+        <span class="skw">type</span>(Key.ENTER)
+
+        <span class="skw">click</span>(Location(<span class="dig">250</span>, <span class="dig">490</span>))
+        general_buttons.click_element(<span class="str">'return_reasons'</span>, -<span class="dig">70</span>, -<span class="dig">75</span>, <span class="str">'select return reason'</span>)
+        <span class="skw">wait</span>(<span class="str">'return_reasons_'</span> + locale + <span class="str">'.png'</span>, <span class="dig">30</span>)
+        <span class="skw">type</span>(Key.ENTER)
+
+        general_buttons.click_element(<span class="str">'goods_return'</span>, <span class="dig">70</span>, -<span class="dig">40</span>, <span class="str">'RETURN SELECTION btn'</span>)
+
+        x += <span class="dig">1</span>
+
+<span class="kw">def</span> finish_returns():
+    <span class="cmt"># finish return</span>
+    general_buttons.click_element(<span class="str">'secondary_pages_key_pad'</span>, <span class="dig">100</span>, <span class="dig">100</span>, <span class="str">'TOTAL btn'</span>)
+    general_functions.four_eyes(l_general_test_settings[<span class="dig">4</span>], l_general_test_settings[<span class="dig">5</span>])
+    general_functions.pay_with_off_line_card()
+
+<span class="kw">def</span> get_receipt_data():
+    <span class="cmt"># store receipt dat for further use</span>
+    file_name = <span class="str">"test_receipts.csv"</span>
+    path = l_base_dir + <span class="str">'test_run\\process_data\\'</span>
+    <span class="kw">global</span> file
+    file = path + file_name
+    <span class="kw">print</span>(<span class="str">'file: '</span> + file)
+    <span class="cmt"># f = open(file, "r")</span>
+
+    receipt = <span class="str">''</span>
+    <span class="kw">with</span> open(file) <span class="kw">as</span> openfileobject:
+        <span class="kw">for</span> receipt <span class="kw">in</span> openfileobject:
+            <span class="kw">print</span>(<span class="str">'receipt: '</span> + receipt)
+            <span class="kw">print</span>(<span class="str">'found or not: '</span> + str(receipt.<span class="skw">find</span>(<span class="str">'NOT USED IN TEST YET'</span>)))
+            <span class="kw">if</span> receipt.<span class="skw">find</span>(<span class="str">'NOT USED IN TEST YET'</span>) != -<span class="dig">1</span>:
+                <span class="kw">print</span>(<span class="str">'found receipt: '</span> + receipt)
+                replaced_receipt = receipt.replace(<span class="str">'NOT USED IN TEST YET'</span>, <span class="str">'USED'</span>)
+                <span class="cmt"># write(replaced_receipt)</span>
+                <span class="kw">print</span>(<span class="str">'replaced receipt: '</span> + replaced_receipt)
+                <span class="kw">return</span> receipt
+                <span class="kw">break</span>
+</pre>
+</body>
+</html>

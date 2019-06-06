@@ -1,0 +1,179 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>basic_sale.sikuli</h2> <a href="basic_sale.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> general_buttons
+<span class="kw">import</span> test_cases
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> time
+
+
+<span class="kw">def</span> basic_sale_off_line_card():
+    general_functions.errorhandling(<span class="str">"ABORT"</span>)
+
+    l_general_test_settings = test_settings.general_test_settings()
+    locale = l_general_test_settings[<span class="dig">8</span>]
+    <span class="kw">print</span>(<span class="str">"locale2: "</span> + locale)
+
+    l_test_settings = test_settings.basic_sale_off_line_card_test_settings(locale)
+
+    <span class="kw">print</span>(<span class="str">'length:'</span> + str(len(l_test_settings)))
+
+    x = <span class="dig">0</span>
+    <span class="kw">while</span> x &lt; len(l_test_settings):
+        y = l_test_settings[x]
+
+        time.<span class="skw">sleep</span>(<span class="dig">5</span>)
+        <span class="cmt"># click SEARCH ITEM button</span>
+        general_buttons.click_element(<span class="str">'main_page_key_pad'</span>, <span class="dig">200</span>, -<span class="dig">40</span>, <span class="str">'search item btn'</span>)
+
+        <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+        <span class="cmt"># move to next line on form</span>
+        <span class="skw">type</span>(Key.ENTER)
+
+        <span class="cmt"># article number</span>
+        <span class="skw">type</span>(str(y[<span class="dig">0</span>]))
+
+        <span class="cmt"># click SEARCH button</span>
+        general_buttons.click_element(<span class="str">'article_search_form'</span>, <span class="dig">300</span>, <span class="dig">40</span>, <span class="str">'search btn'</span>)
+
+        <span class="cmt"># general_functions.get_receipt_and_transaction_data()</span>
+
+        <span class="cmt"># add product(s)</span>
+        z = <span class="dig">0</span>
+        <span class="kw">while</span> z &lt; y[<span class="dig">1</span>] - <span class="dig">1</span>:
+            general_buttons.click_element(<span class="str">'add_or_substract_product'</span>, <span class="dig">100</span>, <span class="dig">0</span>, <span class="str">'PLUS btn'</span>)
+            z += <span class="dig">1</span>
+            general_functions.get_receipt_and_transaction_data()
+
+        <span class="cmt"># click TOTAL button</span>
+        general_buttons.click_element(<span class="str">'secondary_pages_key_pad'</span>, <span class="dig">100</span>, <span class="dig">100</span>, <span class="str">'TOTAL btn'</span>)
+
+        <span class="cmt"># general_functions.write_test_data(general_functions.get_receipt_meta_data())</span>
+
+
+        <span class="cmt"># choose other tenders</span>
+        general_buttons.click_element(<span class="str">'basket_page_footer_menu'</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'other tenders btn'</span>)
+
+        <span class="cmt"># choose off line cards</span>
+        general_buttons.click_element(<span class="str">'basket_page_other_tenders_menu'</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'off line cards btn'</span>)
+
+        <span class="cmt"># choose credit card</span>
+        general_buttons.click_element(<span class="str">'basket_page_other_tenders_off_line_cards'</span>, y[<span class="dig">3</span>],
+                                      y[<span class="dig">4</span>], <span class="str">'one off the of line cards btn'</span>)
+
+        <span class="cmt"># confirm offline card payment</span>
+        <span class="skw">type</span>(Key.ENTER)
+
+        <span class="cmt"># 0010 does the the payment processed pop up appear?</span>
+        test_cases.basic_sale_off_line_card_tc_0010(<span class="str">'does the the payment processed pop up appear?'</span>)
+
+        <span class="cmt"># 0020 if payment processed is canceled do you go back to the basket page?</span>
+
+        <span class="kw">if</span> x == <span class="dig">0</span>:
+            <span class="cmt"># click CANCEL button</span>
+            general_buttons.click_element(<span class="str">'off_line_cards_payment_processed_pop_up'</span>, -<span class="dig">300</span>,
+                                          <span class="dig">200</span>, <span class="str">'CANCEL btn'</span>)
+            test_cases.basic_sale_off_line_card_tc_0020(<span class="str">'if payment processed is canceled '</span>
+                                                        <span class="str">'do you go back to the basket page?'</span>)
+
+            <span class="cmt"># choose other tenders</span>
+            general_buttons.click_element(<span class="str">'basket_page_footer_menu'</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'other tenders btn'</span>)
+
+            <span class="cmt"># choose off line cards</span>
+            general_buttons.click_element(<span class="str">'basket_page_other_tenders_menu'</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'off line cards btn'</span>)
+
+            <span class="cmt"># choose credit card</span>
+            general_buttons.click_element(<span class="str">'basket_page_other_tenders_off_line_cards'</span>, y[<span class="dig">3</span>],
+                                          y[<span class="dig">4</span>], <span class="str">'one off the of line cards btn'</span>)
+
+            <span class="cmt"># confirm offline card payment</span>
+            <span class="skw">type</span>(Key.ENTER)
+
+        <span class="cmt"># "off_line_cards_payment_procesed_pop_up_de_DE-1.png"</span>
+        <span class="cmt"># confirm card is processed</span>
+        <span class="cmt"># general_buttons.click_element('off_line_cards_payment_processed_pop_up',    300, 200, 'CONTINUE btn')</span>
+
+        <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+        <span class="skw">type</span>(Key.ENTER)
+
+        <span class="kw">print</span>(<span class="str">'x: '</span> + str(x))
+        x += <span class="dig">1</span>
+
+    <span class="cmt"># general end of test case</span>
+    general_functions.end_of_test_case()
+</pre>
+</body>
+</html>

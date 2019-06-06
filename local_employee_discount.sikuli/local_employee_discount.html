@@ -1,0 +1,236 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>local_employee_discount.sikuli</h2> <a href="local_employee_discount.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> general_buttons
+<span class="kw">import</span> test_cases
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> time
+<span class="kw">import</span> string
+
+
+<span class="kw">global</span> l_general_test_settings
+l_general_test_settings = test_settings.general_test_settings()
+<span class="kw">global</span> locale
+locale = l_general_test_settings[<span class="dig">8</span>]
+<span class="kw">global</span> l_base_dir
+l_base_dir = l_general_test_settings[<span class="dig">10</span>]
+<span class="kw">global</span> l_test_settings
+l_test_settings = test_settings.local_employee_discount(locale)
+
+
+<span class="kw">def</span> local_employee_discount_line_item(settings_index):
+
+    settings_for_this_test = l_test_settings[settings_index]
+    general_functions.fill_basket(settings_for_this_test[<span class="dig">0</span>], settings_for_this_test[<span class="dig">1</span>])
+    general_buttons.main_page_footermenu_btns(<span class="str">'DISCOUNTS btn'</span>, -<span class="dig">70</span>, <span class="dig">0</span>)
+    general_buttons.click_element(<span class="str">'secondary_pages_discount_btns'</span>, -<span class="dig">200</span>, <span class="dig">0</span>, <span class="str">'ADD EMPLOYEE btn'</span>)
+
+    test_cases.does_part_of_screen_exist(<span class="str">'employee_search_screen'</span>, <span class="dig">0.5</span>, <span class="str">'are all elements on the employee_search_screen OK'</span>)
+
+    add_employee(settings_for_this_test)
+    <span class="skw">sleep</span>(<span class="dig">7</span>)
+
+    test_cases.does_part_of_screen_exist(<span class="str">'employee_discount_btns'</span>, <span class="dig">0.5</span>, <span class="str">'are the right buttons present in the employee discount menu?'</span>)
+
+    general_buttons.click_element(<span class="str">'employee_discount_btns'</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'EMPLOYEE ITEM DISCOUNT btn'</span>)  <span class="cmt"># line item discount</span>
+
+    <span class="kw">if</span> settings_for_this_test[<span class="dig">4</span>] == <span class="dig">50</span>:  <span class="cmt"># discount</span>
+        x = -<span class="dig">70</span>  <span class="cmt"># 50%</span>
+    <span class="kw">else</span>:
+        x = -<span class="dig">200</span>  <span class="cmt"># 30%</span>
+
+    general_buttons.click_element(<span class="str">'employee_discount_percentage'</span>, x, -<span class="dig">70</span>, <span class="str">'EMPLOYEE ITEM DISCOUNT % btns'</span>)  <span class="cmt"># 50%</span>
+    general_functions.pay_transaction()
+    general_functions.end_of_test_case()
+
+
+<span class="kw">def</span> local_employee_discount_transaction(settings_index):
+
+    settings_for_this_test = l_test_settings[settings_index]
+    general_functions.fill_basket(settings_for_this_test[<span class="dig">0</span>], settings_for_this_test[<span class="dig">1</span>])
+    general_buttons.main_page_footermenu_btns(<span class="str">'DISCOUNTS btn'</span>, -<span class="dig">70</span>, <span class="dig">0</span>)
+    general_buttons.click_element(<span class="str">'secondary_pages_discount_btns'</span>, -<span class="dig">200</span>, <span class="dig">0</span>, <span class="str">'ADD EMPLOYEE btn'</span>)
+
+    <span class="cmt"># test_cases.does_part_of_screen_exist('employee_search_screen', 0.5, 'are all elements on the employee_search_screen OK')</span>
+
+    add_employee(settings_for_this_test)
+    <span class="skw">sleep</span>(<span class="dig">7</span>)
+
+    <span class="cmt"># test_cases.does_part_of_screen_exist('employee_discount_btns', 0.5, 'are the right buttons present in the employee discount menu?')</span>
+
+    general_buttons.click_element(<span class="str">'employee_discount_btns'</span>, <span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'EMPLOYEE TRANSACTION DISCOUNT btn'</span>)  <span class="cmt"># transation discount</span>
+
+    <span class="kw">if</span> settings_for_this_test[<span class="dig">4</span>] == <span class="dig">50</span>:  <span class="cmt"># discount</span>
+        x = -<span class="dig">70</span>  <span class="cmt"># 50%</span>
+    <span class="kw">else</span>:
+        x = -<span class="dig">200</span>  <span class="cmt"># 30%</span>
+
+    general_buttons.click_element(<span class="str">'employee_discount_percentage'</span>, x, -<span class="dig">70</span>, <span class="str">'EMPLOYEE ITEM DISCOUNT % btns'</span>)  <span class="cmt"># 50%</span>
+    general_functions.pay_transaction()
+    general_functions.end_of_test_case()
+
+
+<span class="kw">def</span> local_employee_discount_remove_employee(settings_index):
+
+
+    settings_for_this_test = l_test_settings[settings_index]
+    general_functions.fill_basket(settings_for_this_test[<span class="dig">0</span>], settings_for_this_test[<span class="dig">1</span>])
+    general_buttons.main_page_footermenu_btns(<span class="str">'DISCOUNTS btn'</span>, -<span class="dig">70</span>, <span class="dig">0</span>)
+    general_buttons.click_element(<span class="str">'secondary_pages_discount_btns'</span>, -<span class="dig">200</span>, <span class="dig">0</span>, <span class="str">'ADD EMPLOYEE btn'</span>)
+
+    add_employee(settings_for_this_test)
+    <span class="skw">sleep</span>(<span class="dig">7</span>)
+
+    general_buttons.click_element(<span class="str">'employee_discount_btns'</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'EMPLOYEE ITEM DISCOUNT btn'</span>)  <span class="cmt"># line item discount</span>
+
+    <span class="kw">if</span> settings_for_this_test[<span class="dig">4</span>] == <span class="dig">50</span>:  <span class="cmt"># discount</span>
+        x = -<span class="dig">70</span>  <span class="cmt"># 50%</span>
+    <span class="kw">else</span>:
+        x = -<span class="dig">200</span>  <span class="cmt"># 30%</span>
+
+    general_buttons.click_element(<span class="str">'employee_discount_percentage'</span>, x, -<span class="dig">70</span>, <span class="str">'EMPLOYEE ITEM DISCOUNT % btns'</span>)  <span class="cmt"># 50%</span>
+
+    general_buttons.main_page_footermenu_btns(<span class="str">'DISCOUNTS btn'</span>, -<span class="dig">70</span>, <span class="dig">0</span>)
+
+    general_buttons.click_element(<span class="str">'employee_discount_btns'</span>, <span class="dig">200</span>, <span class="dig">0</span>, <span class="str">'REMOVE EMPLOYEE btn'</span>)  <span class="cmt"># line item discount</span>
+
+    <span class="skw">type</span>(Key.ENTER)
+
+    test_cases.does_part_of_screen_exist(<span class="str">'employee_and_discount_are_removed'</span>, <span class="dig">0.7</span>, <span class="str">'are employee and discount removed'</span>)
+
+    general_functions.pay_transaction()
+    general_functions.end_of_test_case()
+
+
+<span class="kw">def</span> local_employee_discount_remove_line_item_discount(settings_index):
+
+    settings_for_this_test = l_test_settings[settings_index]
+    general_functions.fill_basket(settings_for_this_test[<span class="dig">0</span>], settings_for_this_test[<span class="dig">1</span>])
+    general_buttons.main_page_footermenu_btns(<span class="str">'DISCOUNTS btn'</span>, -<span class="dig">70</span>, <span class="dig">0</span>)
+    general_buttons.click_element(<span class="str">'secondary_pages_discount_btns'</span>, -<span class="dig">200</span>, <span class="dig">0</span>, <span class="str">'ADD EMPLOYEE btn'</span>)
+    add_employee(settings_for_this_test) <span class="cmt"># add employee data</span>
+    <span class="skw">sleep</span>(<span class="dig">7</span>)
+    general_buttons.click_element(<span class="str">'employee_discount_btns'</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'EMPLOYEE ITEM DISCOUNT btn'</span>)  <span class="cmt"># line item discount</span>
+
+    <span class="kw">if</span> settings_for_this_test[<span class="dig">4</span>] == <span class="dig">50</span>:  <span class="cmt"># discount</span>
+        x = -<span class="dig">70</span>  <span class="cmt"># 50%</span>
+    <span class="kw">else</span>:
+        x = -<span class="dig">200</span>  <span class="cmt"># 30%</span>
+
+    general_buttons.click_element(<span class="str">'employee_discount_percentage'</span>, x, -<span class="dig">70</span>, <span class="str">'EMPLOYEE ITEM DISCOUNT % btns'</span>)  <span class="cmt"># 50%</span>
+    general_buttons.main_page_footermenu_btns(<span class="str">'DISCOUNTS btn'</span>, -<span class="dig">70</span>, <span class="dig">0</span>)
+    general_buttons.click_element(<span class="str">'employee_discount_btns'</span>, <span class="dig">70</span>, <span class="dig">70</span>, <span class="str">'REMOVE ITEM DISCOUNT btn'</span>)  <span class="cmt"># line item discount</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    test_cases.does_part_of_screen_exist(<span class="str">'discount_is_removed_but_the_employee_isnt'</span>, <span class="dig">0.7</span>, <span class="str">'is the line item discount removed and is the employee still there'</span>)
+
+    general_functions.pay_transaction()
+    general_functions.end_of_test_case()
+
+<span class="kw">def</span> local_employee_discount_remove_transaction_discount(settings_index):
+
+    settings_for_this_test = l_test_settings[settings_index]
+    general_functions.fill_basket(settings_for_this_test[<span class="dig">0</span>], settings_for_this_test[<span class="dig">1</span>])
+    general_buttons.main_page_footermenu_btns(<span class="str">'DISCOUNTS btn'</span>, -<span class="dig">70</span>, <span class="dig">0</span>)
+    general_buttons.click_element(<span class="str">'secondary_pages_discount_btns'</span>, -<span class="dig">200</span>, <span class="dig">0</span>, <span class="str">'ADD EMPLOYEE btn'</span>)
+    add_employee(settings_for_this_test) <span class="cmt"># add employee data</span>
+    <span class="skw">sleep</span>(<span class="dig">7</span>)
+    general_buttons.click_element(<span class="str">'employee_discount_btns'</span>, -<span class="dig">70</span>, <span class="dig">0</span>, <span class="str">'EMPLOYEE TRANSACTION DISCOUNT btn'</span>)  <span class="cmt"># transaction discount</span>
+
+    <span class="kw">if</span> settings_for_this_test[<span class="dig">4</span>] == <span class="dig">50</span>:  <span class="cmt"># discount</span>
+        x = -<span class="dig">70</span>  <span class="cmt"># 50%</span>
+    <span class="kw">else</span>:
+        x = -<span class="dig">200</span>  <span class="cmt"># 30%</span>
+
+    general_buttons.click_element(<span class="str">'employee_discount_percentage'</span>, x, -<span class="dig">70</span>, <span class="str">'EMPLOYEE ITEM DISCOUNT % btns'</span>)  <span class="cmt"># 50%</span>
+    general_buttons.main_page_footermenu_btns(<span class="str">'DISCOUNTS btn'</span>, -<span class="dig">70</span>, <span class="dig">0</span>)
+    general_buttons.click_element(<span class="str">'employee_discount_btns'</span>, <span class="dig">70</span>, <span class="dig">70</span>, <span class="str">'REMOVE ITEM DISCOUNT btn'</span>)  <span class="cmt"># line item discount</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    test_cases.does_part_of_screen_exist(<span class="str">'discount_is_removed_but_the_employee_isnt'</span>, <span class="dig">0.7</span>, <span class="str">'is the transaction discount removed and is the employee still there'</span>)
+
+    general_functions.pay_transaction()
+    general_functions.end_of_test_case()
+
+<span class="kw">def</span> add_employee(settings_for_this_test):
+    <span class="skw">type</span>(Key.ENTER)  <span class="cmt"># go to first name field</span>
+    <span class="skw">type</span>(settings_for_this_test[<span class="dig">2</span>])  <span class="cmt"># enter first name</span>
+    <span class="skw">type</span>(Key.ENTER)  <span class="cmt"># goto last name field</span>
+    <span class="skw">type</span>(settings_for_this_test[<span class="dig">3</span>])  <span class="cmt"># enter last name</span>
+    <span class="skw">type</span>(Key.ENTER)  <span class="cmt"># confirm and search</span>
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">type</span>(Key.ENTER)
+</pre>
+</body>
+</html>

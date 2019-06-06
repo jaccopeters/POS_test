@@ -1,0 +1,264 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>general_buttons.sikuli</h2> <a href="general_buttons.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">import</span> general_functions
+
+<span class="kw">def</span> main_page_num_key_board(button, lang, x, y):
+    <span class="skw">click</span>(Pattern(<img src="1537278204869.png" />).targetOffset(button, x ,y))
+    general_functions.writeTestResults(<span class="str">"def pay_out_page_amounts"</span>, <span class="str">"data"</span>, <span class="str">""</span>, <span class="str">""</span>, button, <span class="str">""</span>)
+
+<span class="kw">def</span> main_page_footermenu_1(button, x ,y):
+
+    picture = <img src="1537270556525.png" />
+
+    <span class="cmt">#click(Pattern("ITEMSIGIFTOT.png").targetOffset(184,0))</span>
+
+    <span class="skw">click</span>(Pattern(picture).targetOffset(x,y))
+
+    general_functions.writeTestResults(<span class="str">"def main_page_footermenu_btns"</span>, <span class="str">"data"</span>, <span class="str">"x-coordinate"</span> + str(x), <span class="str">"y-coordinate"</span> + str(y), button, <span class="str">""</span>)
+
+<span class="kw">def</span> main_page_footermenu_2(button, x ,y):
+
+    picture = <img src="1537275898660.png" />
+    <span class="cmt">#click(Pattern("ITEMSIGIFTOT.png").targetOffset(184,0))</span>
+
+    <span class="skw">click</span>(Pattern(picture).targetOffset(x,y))
+
+    general_functions.writeTestResults(<span class="str">"def main_page_footermenu_btns"</span>, <span class="str">"data"</span>, <span class="str">"x-coordinate"</span> + str(x), <span class="str">"y-coordinate"</span> + str(y), button, <span class="str">""</span>)
+
+
+
+
+<span class="cmt">#items/gift voucher menu items</span>
+
+<span class="cmt">#discounts menu items</span>
+
+<span class="cmt">#other menu items</span>
+<span class="kw">def</span> main_page_footermenu_btns(button, x ,y):
+    <span class="skw">click</span>(Pattern(<img src="PRINTGIFTREP.png" />).similar(<span class="dig">0.68</span>))
+    general_functions.writeTestResults(<span class="str">"def main_page_footermenu_btns"</span>, <span class="str">"data"</span>, <span class="str">"x-coordinate"</span> + str(x),<span class="str">"y-coordinate"</span> + str(y), button, <span class="str">""</span>)
+
+
+<span class="kw">def</span> other_tenders_menu_btns(button, x, y):
+    <span class="skw">click</span>(Pattern(<img src="1537276307608.png" />).similar(<span class="dig">0.68</span>))
+    general_functions.writeTestResults(<span class="str">"def main_page_footermenu_btns"</span>, <span class="str">"data"</span>, <span class="str">"x-coordinate"</span> + str(x),<span class="str">"y-coordinate"</span> + str(y), button, <span class="str">""</span>)
+
+<span class="kw">def</span> off_line_cards_card_btns(button, x, y):
+    <span class="skw">click</span>(Pattern(<img src="1537276622345.png" />).targetOffset(x, y))
+    general_functions.writeTestResults(<span class="str">"def off_line_cards_card_btns"</span>, <span class="str">"data"</span>, <span class="str">"x-coordinate"</span> + str(x),<span class="str">"y-coordinate"</span> + str(y), button, <span class="str">""</span>)
+
+
+
+<span class="cmt">#language is not important, location is the same in all languages</span>
+<span class="cmt">#def main_page_other_menu( x, y):</span>
+
+<span class="cmt">#customer menu items</span>
+
+
+
+<span class="kw">def</span> secundary_pages_keyboard(number):
+    <span class="kw">if</span> number == <span class="str">"00"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(-<span class="dig">65</span>,<span class="dig">136</span>))
+    <span class="kw">if</span> number == <span class="str">"0"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(-<span class="dig">154</span>,<span class="dig">134</span>))
+    <span class="kw">if</span> number == <span class="str">"1"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(-<span class="dig">160</span>,<span class="dig">33</span>))
+    <span class="kw">if</span> number == <span class="str">"2"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(-<span class="dig">58</span>,<span class="dig">46</span>))
+    <span class="kw">if</span> number == <span class="str">"3"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(<span class="dig">24</span>,<span class="dig">42</span>))
+    <span class="kw">if</span> number == <span class="str">"4"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(-<span class="dig">154</span>,-<span class="dig">46</span>))
+    <span class="kw">if</span> number == <span class="str">"5"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(-<span class="dig">67</span>,-<span class="dig">41</span>))
+    <span class="kw">if</span> number == <span class="str">"6"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(<span class="dig">21</span>,-<span class="dig">47</span>))
+    <span class="kw">if</span> number == <span class="str">"7"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(-<span class="dig">151</span>,-<span class="dig">140</span>))
+    <span class="kw">if</span> number == <span class="str">"8"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(-<span class="dig">67</span>,-<span class="dig">136</span>))
+    <span class="kw">if</span> number == <span class="str">"9"</span>:
+        general_functions.writeTestResults(<span class="str">"number"</span>, number, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">click</span>(Pattern(<img src="O0.png" />).targetOffset(<span class="dig">28</span>,-<span class="dig">136</span>))
+
+<span class="kw">def</span> drop_off_choose_denominations(denomination, <span class="skw">type</span>):
+
+    <span class="skw">wait</span>(<img src="0005Pounds00.png" />, <span class="dig">10</span>)
+    <span class="kw">if</span> denomination == <span class="str">"5 pounds"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0005Pounds00.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0005Pounds00.png" />).targetOffset(-<span class="dig">50</span>,-<span class="dig">216</span>))
+    <span class="kw">if</span> denomination == <span class="str">"10 pounds"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0005Pounds00.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0005Pounds00.png" />).targetOffset(-<span class="dig">43</span>,-<span class="dig">170</span>))
+    <span class="kw">if</span> denomination == <span class="str">"20 pounds"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0005Pounds00.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0005Pounds00.png" />).targetOffset(-<span class="dig">53</span>,-<span class="dig">122</span>))
+    <span class="kw">if</span> denomination == <span class="str">"50 pounds"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0005Pounds00.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0005Pounds00.png" />).targetOffset(-<span class="dig">35</span>,-<span class="dig">74</span>))
+    <span class="kw">if</span> denomination == <span class="str">"100 pounds"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0005Pounds00.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0005Pounds00.png" />).targetOffset(-<span class="dig">46</span>,-<span class="dig">26</span>))
+    <span class="kw">if</span> denomination == <span class="str">"1 pence"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0001Pence2Pe.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0001Pence2Pe.png" />).targetOffset(-<span class="dig">40</span>,-<span class="dig">160</span>))
+    <span class="kw">if</span> denomination == <span class="str">"2 pence"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0001Pence2Pe.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0001Pence2Pe.png" />).targetOffset(-<span class="dig">40</span>,-<span class="dig">114</span>))
+    <span class="kw">if</span> denomination == <span class="str">"5 pence"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0001Pence2Pe.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0001Pence2Pe.png" />).targetOffset(-<span class="dig">40</span>,-<span class="dig">69</span>))
+    <span class="kw">if</span> denomination == <span class="str">"10 pence"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0001Pence2Pe.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0001Pence2Pe.png" />).targetOffset(-<span class="dig">40</span>,-<span class="dig">23</span>))
+    <span class="kw">if</span> denomination == <span class="str">"20 pence"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0001Pence2Pe.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0001Pence2Pe.png" />).targetOffset(-<span class="dig">40</span>,<span class="dig">23</span>))
+    <span class="kw">if</span> denomination == <span class="str">"50 pence"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0001Pence2Pe.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0001Pence2Pe.png" />).targetOffset(<span class="dig">40</span>,<span class="dig">69</span>))
+    <span class="kw">if</span> denomination == <span class="str">"1 pound"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0001Pence2Pe.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0001Pence2Pe.png" />).targetOffset(<span class="dig">40</span>,<span class="dig">114</span>))
+    <span class="kw">if</span> denomination == <span class="str">"2 pounds"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<img src="0001Pence2Pe.png" />, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="0001Pence2Pe.png" />).targetOffset(<span class="dig">40</span>,<span class="dig">160</span>))
+    <span class="kw">if</span> denomination == <span class="str">"1 pence roll"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<span class="str">"1Pence000100"</span>, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="1Pence000100.png" />).targetOffset(-<span class="dig">40</span>,-<span class="dig">160</span>))
+    <span class="kw">if</span> denomination == <span class="str">"2 pence roll"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<span class="str">"1Pence000100"</span>, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="1Pence000100.png" />).targetOffset(-<span class="dig">40</span>,-<span class="dig">114</span>))
+    <span class="kw">if</span> denomination == <span class="str">"5 pence roll"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<span class="str">"1Pence000100"</span>, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="1Pence000100.png" />).targetOffset(-<span class="dig">40</span>,-<span class="dig">69</span>))
+    <span class="kw">if</span> denomination == <span class="str">"10 pence roll"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<span class="str">"1Pence000100"</span>, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="1Pence000100.png" />).targetOffset(-<span class="dig">40</span>,-<span class="dig">23</span>))
+    <span class="kw">if</span> denomination == <span class="str">"20 pence roll"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<span class="str">"1Pence000100"</span>, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="1Pence000100.png" />).targetOffset(-<span class="dig">40</span>,<span class="dig">23</span>))
+    <span class="kw">if</span> denomination == <span class="str">"50 pence roll"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<span class="str">"1Pence000100"</span>, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="1Pence000100.png" />).targetOffset(<span class="dig">40</span>,<span class="dig">69</span>))
+    <span class="kw">if</span> denomination == <span class="str">"1 pound roll"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<span class="str">"1Pence000100"</span>, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="1Pence000100.png" />).targetOffset(<span class="dig">40</span>,<span class="dig">114</span>))
+    <span class="kw">if</span> denomination == <span class="str">"2 pounds roll"</span>:
+        general_functions.writeTestResults(<span class="str">"denomination"</span>, denomination, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>, <span class="str">""</span>)
+        <span class="skw">wait</span>(<span class="str">"1Pence000100"</span>, <span class="dig">10</span>)
+        <span class="skw">click</span>(Pattern(<img src="1Pence000100.png" />).targetOffset(<span class="dig">40</span>,<span class="dig">160</span>))
+
+
+<span class="kw">def</span> secondary_pages_pay_in_out_reasons(button, x, y):
+    <span class="skw">click</span>(<img src="1537269770265.png" />)
+    general_functions.writeTestResults(<span class="str">"def secondary_pages_pay_in_out_reasons"</span>, <span class="str">"data"</span>, <span class="str">"x-coordinate "</span> + str(x), <span class="str">"y-coordinate "</span> + str(y), button, <span class="str">""</span>)
+
+<span class="kw">def</span> pay_out_page_amount(button):
+    <span class="skw">wait</span>(<img src="1537270174812.png" />,<span class="dig">10</span>)
+    <span class="skw">click</span>(<img src="1537270174812.png" />)
+    general_functions.writeTestResults(<span class="str">"def pay_out_page_amounts"</span>, <span class="str">"data"</span>, <span class="str">""</span>, <span class="str">""</span>, button, <span class="str">""</span>)
+</pre>
+</body>
+</html>

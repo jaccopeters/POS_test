@@ -1,0 +1,392 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>test_cases.sikuli</h2> <a href="test_cases.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> time
+<span class="kw">import</span> string
+<span class="kw">import</span> glob
+
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> general_buttons
+<span class="kw">import</span> test_cases
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> returns_with_receipt
+
+<span class="kw">global</span> l_general_test_settings
+l_general_test_settings = test_settings.general_test_settings()
+<span class="kw">global</span> locale
+locale = l_general_test_settings[<span class="dig">8</span>]
+<span class="kw">global</span> l_base_dir
+l_base_dir = l_general_test_settings[<span class="dig">10</span>]
+<span class="kw">global</span> l_test_settings
+l_test_settings = test_settings.returns(locale)
+
+<span class="str">'''
+TEST CASES
+
+item not found
+0010 does the main screen look OK?
+0020 does the
+
+drop off
+0010 is the drop off amount correct?
+
+basic sale off ine card
+0010 does the the payment processed button appear
+0020 if payment processed is canceled do you go back to the basket page?
+
+cancel receipt
+
+void line item
+0010 is the line item voided
+
+price override
+0010 are the override amounts OK?
+
+local employee discount
+0010 are the right buttons present in the employee discount menu
+
+errors and warnings
+0010 does the the payment processed button appear
+0020 if payment processed is canceled do you go back to the basket page
+0030 0010 does the cancellation warning pop up
+'''</span><span class="str">''</span>
+
+
+<span class="cmt"># item not found</span>
+
+<span class="cmt"># 0010 does the main screen look OK?</span>
+
+<span class="kw">def</span> item_not_found_tc_0010(test_case_description):
+    l_general_test_settings = test_settings.general_test_settings()
+    <span class="kw">print</span>(<span class="str">"l_general_test_settings 1: "</span> + l_general_test_settings[<span class="dig">8</span>])
+
+    picture = <span class="str">'main_screen_complete_'</span> + locale + <span class="str">'.png'</span>
+
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.85</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.85</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+
+    <span class="kw">print</span>(<span class="str">"test result for function: "</span> + test_result)
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"home_page_TC_0010_002"</span>, test_result, <span class="str">""</span>, <span class="str">"main page"</span>, reg, picture)
+
+
+<span class="cmt"># drop off</span>
+
+<span class="cmt"># 0010 is the drop off amount correct?</span>
+
+<span class="kw">def</span> drop_off_tc_0010(test_case_description):
+    picture = <span class="str">"drop_off_amount_"</span> + locale + <span class="str">'.png'</span>
+
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.85</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.85</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+
+    <span class="cmt"># general_functions.writeTestResults("drop off", "GUI", "drop off TC 0010", test_result, "", "")</span>
+    general_functions.writeTestResults(
+        test_case_description, <span class="str">"GUI"</span>, <span class="str">"home_page_TC_0010_002"</span>, test_result, <span class="str">""</span>, <span class="str">"menu level 1 home"</span>, reg, picture)
+
+
+<span class="cmt"># basic sale off line card</span>
+
+<span class="cmt"># 0010 does the the payment processed button appear</span>
+
+<span class="kw">def</span> basic_sale_off_line_card_tc_0010(test_case_description):
+    picture = <span class="str">'off_line_cards_payment_procesed_pop_up_'</span> + locale + <span class="str">'.png'</span>
+
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.60</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.60</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+
+    <span class="kw">print</span>(<span class="str">"test result for function: "</span> + test_result)
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"basic_sale_off_line_card_TC_0010"</span>, test_result, <span class="str">""</span>, <span class="str">"basket page"</span>, reg, picture)
+
+
+<span class="cmt"># 0020 if payment processed is canceled do you go back to the basket page</span>
+
+<span class="kw">def</span> basic_sale_off_line_card_tc_0020(test_case_description):
+    picture = <span class="str">'basket_page_key_pad_and_footer_menu_'</span> + locale + <span class="str">'.png'</span>
+
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.85</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.85</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+
+    <span class="kw">print</span>(<span class="str">"test result for function: "</span> + test_result)
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"basic_sale_off_line_card_TC_0020"</span>, test_result, <span class="str">""</span>, <span class="str">"basket page"</span>, reg, picture)
+
+<span class="cmt"># VOID LINE ITEM</span>
+
+<span class="cmt"># 0010 is the line item voided</span>
+
+<span class="kw">def</span> void_line_item_tc_0010(test_case_description):
+
+    picture = <span class="str">"voided_line_item_"</span> + locale + <img src=".png" />
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.30</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.30</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"void_line_item_tc_0010"</span>, test_result, <span class="str">""</span>, <span class="str">" basket page"</span>, reg, picture)
+
+
+<span class="cmt"># PRICE OVERRIDE</span>
+<span class="cmt"># 0010 are the override amounts OK?</span>
+<span class="kw">def</span> price_override_tc_0010(test_case_description):
+
+    picture = <span class="str">"price_override_"</span> + locale + <img src=".png" />
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.70</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.70</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"price_override_tc_0010"</span>, test_result, <span class="str">""</span>, <span class="str">" basket page"</span>, reg, picture)
+
+<span class="cmt"># LOCAL EMPLOYEE DISCOUNT</span>
+<span class="cmt"># 0010 are the right buttons present in the employee discount menu</span>
+<span class="kw">def</span> local_employee_discount_tc_0010(test_case_description):
+
+    picture = <span class="str">"employee_discount_btns_"</span> + locale + <img src=".png" />
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.70</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.70</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"local_employee_discount_tc_0010"</span>, test_result, <span class="str">""</span>, <span class="str">"employee discount menu"</span>, reg, picture)
+
+
+<span class="cmt"># errors and warnings</span>
+
+<span class="cmt"># 0010 are the validations for the 4-eyes OK</span>
+
+<span class="kw">def</span> errors_and_warnings_tc_0010(test_case_description):
+    <span class="cmt"># non existing user</span>
+    <span class="skw">type</span>(<span class="str">"589423287"</span>)
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="cmt"># supervisor password</span>
+    <span class="skw">type</span>(l_general_test_settings[<span class="dig">5</span>])
+    <span class="cmt"># confirm authentification</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    picture = <span class="str">"4_eyes_wrong_user_"</span> + locale + <img src=".png" />
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.85</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.85</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"errors_and_warnings_tc_0010"</span>, test_result, <span class="str">""</span>, <span class="str">"4 eyes form"</span>, reg, picture)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    <span class="cmt"># close error message</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    <span class="cmt"># 4 eyes required</span>
+    <span class="skw">type</span>(l_general_test_settings[<span class="dig">2</span>])
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">type</span>(l_general_test_settings[<span class="dig">3</span>])
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    picture = <span class="str">"4_eyes_validation_required_"</span> + locale + <img src=".png" />
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.85</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.85</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"errors_and_warnings_tc_0010"</span>, test_result, <span class="str">""</span>, <span class="str">"4 eyes form"</span>, reg, picture)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    <span class="cmt"># close error message</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    <span class="cmt"># invalid password</span>
+    <span class="skw">type</span>(l_general_test_settings[<span class="dig">4</span>])
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">type</span>(<span class="str">"123456789"</span>)
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    picture = <span class="str">"4_eyes_invalid_password_"</span> + locale + <img src=".png" />
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.85</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.85</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"errors_and_warnings_tc_0010"</span>, test_result, <span class="str">""</span>, <span class="str">"4 eyes form"</span>, reg, picture)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    <span class="cmt"># close error message</span>
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+    <span class="cmt"># correct authorization</span>
+    <span class="skw">type</span>(l_general_test_settings[<span class="dig">4</span>])
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">type</span>(l_general_test_settings[<span class="dig">5</span>])
+    <span class="skw">type</span>(Key.ENTER)
+
+    <span class="skw">sleep</span>(<span class="dig">2</span>)
+
+
+<span class="cmt"># 0020 does the footwear item not found error appear?</span>
+
+<span class="kw">def</span> errors_and_warnings_tc_0020(test_case_description):
+    <span class="kw">print</span>(<span class="str">"l_general_test_settings 1: "</span> + l_general_test_settings[<span class="dig">8</span>])
+
+    <span class="cmt"># "item_not_found_error_en_GB.png"</span>
+
+    <span class="kw">print</span>(<span class="str">"picture: "</span> + <span class="str">"item_not_found_error_"</span> + locale + <img src=".png" />)
+    picture = <span class="str">"item_not_found_error_"</span> + locale + <img src=".png" />
+
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.85</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.85</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"home_page_TC_0010_002"</span>, test_result, <span class="str">""</span>, <span class="str">"item not found page"</span>, reg, picture)
+
+
+<span class="kw">def</span> errors_and_warnings_tc_0030(test_case_description):
+
+    <span class="cmt"># "does the cancellation warning pop up"</span>
+
+    <span class="kw">print</span>(<span class="str">"picture: "</span> + <span class="str">"item_not_found_error_"</span> + locale + <img src=".png" />)
+    picture = <span class="str">"item_not_found_error_"</span> + locale + <img src=".png" />
+
+    <span class="kw">if</span> exists(Pattern(picture).similar(<span class="dig">0.85</span>)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(<span class="dig">0.85</span>))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+
+    general_functions.writeTestResults(test_case_description, <span class="str">"GUI"</span>, <span class="str">"does the cancellation warning pop up"</span>, test_result, <span class="str">""</span>, <span class="str">"item not found page"</span>, reg, picture)
+
+
+<span class="kw">def</span> does_part_of_screen_exist(subject, similarity, test_case_description):
+
+    picture = subject + <span class="str">'_'</span> + locale + <img src=".png" />
+    the_complete_picture = l_base_dir + <span class="str">'on till regression test\\test_cases.sikuli\\'</span> + picture
+
+    <span class="kw">print</span>(<span class="str">'hier: '</span> + the_complete_picture)
+
+    <span class="cmt"># is there a localized version  of the picture, if not use the general version</span>
+    <span class="kw">if</span> os.path.isfile(the_complete_picture):
+        <span class="kw">print</span>(<span class="str">'localized file does exist: '</span> + picture)
+    <span class="kw">else</span>:
+        picture = subject + <span class="str">'.png'</span>
+        <span class="kw">print</span>(<span class="str">'localized file does NOT exist: '</span> + picture)
+
+    <span class="kw">print</span>(<span class="str">"test picture: "</span> + picture)
+
+    <span class="kw">if</span> exists(Pattern(picture).similar(similarity)):
+        test_result = <span class="str">"OK"</span>
+        reg = <span class="skw">find</span>(Pattern(picture).similar(similarity))
+    <span class="kw">else</span>:
+        test_result = <span class="str">"NOK"</span>
+        reg = <span class="str">""</span>
+
+    general_functions.writeTestResults(test_case_description, <span class="str">'GUI'</span>, subject, test_result, <span class="str">'similarity: '</span> + str(similarity), <span class="str">''</span>, reg, picture)
+</pre>
+</body>
+</html>

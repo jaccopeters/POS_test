@@ -1,0 +1,127 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>drop_off.sikuli</h2> <a href="drop_off.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># general modules</span>
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">import</span> general_functions
+<span class="kw">import</span> time
+<span class="kw">import</span> test_settings
+<span class="kw">import</span> general_buttons
+
+
+<span class="cmt"># test modules</span>
+<span class="kw">import</span> pay_in
+<span class="kw">import</span> pay_out
+<span class="kw">import</span> drop_off
+<span class="kw">import</span> item_not_found
+<span class="kw">import</span> void_line_item
+<span class="kw">import</span> basic_sale
+
+<span class="cmt"># SEE excel TEST CASES TO ADD</span>
+
+<span class="kw">global</span> l_general_test_settings
+l_general_test_settings = test_settings.general_test_settings()
+<span class="kw">global</span> locale
+locale = l_general_test_settings[<span class="dig">8</span>]
+<span class="kw">global</span> l_test_settings
+l_test_settings = test_settings.drop_off(locale)
+
+
+<span class="kw">def</span> drop_off():
+    general_functions.errorhandling(<span class="str">"ABORT"</span>)
+    general_functions.start_of_test_case(<span class="str">'drop off'</span>)
+    l_general_test_settings = test_settings.general_test_settings()
+
+    general_functions.four_eyes(l_general_test_settings[<span class="dig">4</span>], l_general_test_settings[<span class="dig">5</span>])
+
+    time.<span class="skw">sleep</span>(<span class="dig">6</span>)
+    <span class="kw">for</span> x <span class="kw">in</span> range(<span class="dig">0</span>, l_general_test_settings[<span class="dig">9</span>]):
+        time.<span class="skw">sleep</span>(<span class="dig">0.5</span>)
+
+        number_of_items = [<span class="dig">6</span>, <span class="dig">3</span>, <span class="dig">2</span>, <span class="dig">1</span>, <span class="dig">1</span>]
+
+        <span class="skw">type</span>(str(number_of_items[x]))
+        time.<span class="skw">sleep</span>(<span class="dig">0.5</span>)
+        <span class="skw">type</span>(Key.ENTER)
+        time.<span class="skw">sleep</span>(<span class="dig">0.5</span>)
+        general_functions.writeTestResults(<span class="str">"def drop_off"</span>, <span class="str">"GUI"</span>, <span class="str">"data"</span>, str(x), <span class="str">""</span>, <span class="str">"number of denominations"</span>, <span class="str">""</span>, <span class="str">""</span>)
+        x += <span class="dig">1</span>
+
+    general_buttons.drop_off_page_click(<span class="str">'TAKE OVER'</span>)
+
+    <span class="skw">type</span>(Key.ENTER)
+
+    general_functions.close_drawer_msg()
+</pre>
+</body>
+</html>
