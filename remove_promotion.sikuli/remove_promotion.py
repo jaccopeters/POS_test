@@ -25,7 +25,7 @@ l_test_settings = test_settings.remove_promotion(locale)
 
 def remove():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('remove promotion')
+    general_functions.start_of_test_case('TC remove promotion')
 
     general_functions.fill_basket(l_test_settings[0], l_test_settings[1])
     wait(5)

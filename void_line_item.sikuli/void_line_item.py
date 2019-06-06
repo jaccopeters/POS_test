@@ -24,7 +24,7 @@ l_test_settings = test_settings.void_line_item_test_settings()
 
 def void_line_item():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('void line item')
+    general_functions.start_of_test_case('TC void line item')
     
     wait(1)
 

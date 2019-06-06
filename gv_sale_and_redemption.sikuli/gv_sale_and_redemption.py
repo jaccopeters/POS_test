@@ -25,7 +25,7 @@ l_test_settings = test_settings.gv_sale_and_redemption()
 
 def gv_sale():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('gift voucher sale and redemption')
+    general_functions.start_of_test_case('TC gift voucher sale and redemption')
 
     wait(10)
 

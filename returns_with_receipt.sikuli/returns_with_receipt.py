@@ -24,7 +24,7 @@ l_test_settings = test_settings.returns()
 
 
 def returns_with_receipt():
-    general_functions.start_of_test_case('returns with receipt line items')
+    general_functions.start_of_test_case('TC returns with receipt line items')
 
     receipt_number = general_functions.make_test_receipts(l_test_settings[0], l_test_settings[1])
 
@@ -47,7 +47,7 @@ def returns_with_receipt():
 
 
 def returns_with_receipt_and_exchange():
-    general_functions.start_of_test_case('returns with receipt and exchange')
+    general_functions.start_of_test_case('TC returns with receipt and exchange')
     receipt_number = general_functions.make_test_receipts(l_test_settings[0], l_test_settings[1])
 
     print('receipt_number: ' + receipt_number)

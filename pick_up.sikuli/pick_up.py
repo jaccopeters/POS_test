@@ -18,7 +18,7 @@ l_test_settings = test_settings.pick_up(locale)
 
 def pick_up():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('pick up')
+    general_functions.start_of_test_case('TC pick up')
     l_general_test_settings = test_settings.general_test_settings()
 
     general_buttons.main_page_footer_menu_btns_click('OTHER')

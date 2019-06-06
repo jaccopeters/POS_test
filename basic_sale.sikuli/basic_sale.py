@@ -30,7 +30,7 @@ def basic_sale_off_line_card():
 
         y = l_test_settings[x]
 
-        general_functions.start_of_test_case('basic sale paid with ' + str(y[2]))
+        general_functions.start_of_test_case('TC basic sale paid with ' + str(y[2]))
 
         wait(1)
 

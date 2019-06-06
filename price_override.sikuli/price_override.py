@@ -24,7 +24,7 @@ l_test_settings = test_settings.price_override(locale)
 
 def price_override():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('price override')
+    general_functions.start_of_test_case('TC price override')
     
     general_functions.fill_basket(l_test_settings[0], l_test_settings[1])
     wait(2)

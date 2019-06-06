@@ -26,7 +26,7 @@ l_base_dir = l_general_test_settings[10]
 def promotions():
 
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('promotions')
+    general_functions.start_of_test_case('TC promotions')
 
     l_test_settings = test_settings.promotions()
 
