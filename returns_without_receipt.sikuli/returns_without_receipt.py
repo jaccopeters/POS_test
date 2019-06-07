@@ -36,7 +36,7 @@ def returns_with_out_receipt_item_not_found():
 
 def returns_with_out_receipt_item_not_found_and_exchange():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('returns without receipt item not found and exchange')
+    general_functions.start_of_test_case('TC returns without receipt item not found and exchange')
     # add items to be returned
     returns_with_out_receipt_add_return_items( )
 

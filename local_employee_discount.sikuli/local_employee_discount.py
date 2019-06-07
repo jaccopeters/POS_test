@@ -112,7 +112,7 @@ def local_employee_discount_remove_employee(settings_index):
 def local_employee_discount_remove_line_item_discount(settings_index):
 
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('employee discount remove line item discount')
+    general_functions.start_of_test_case('TC employee discount remove line item discount')
     general_functions.extended_wait("main_page_key_pad", 300)
 
     settings_for_this_test = l_test_settings[settings_index]
@@ -146,7 +146,7 @@ def local_employee_discount_remove_line_item_discount(settings_index):
 def local_employee_discount_remove_transaction_discount(settings_index):
 
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('employee discount remove transaction discount')
+    general_functions.start_of_test_case('TC employee discount remove transaction discount')
     general_functions.extended_wait("main_page_key_pad", 300)
 
     settings_for_this_test = l_test_settings[settings_index]

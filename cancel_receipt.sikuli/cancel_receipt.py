@@ -38,20 +38,18 @@ def cancel_receipt():
         general_functions.fill_basket(y[0], y[1])
 
         if y[2]== 1:  # cancel before the total button is clicked
-            general_functions.start_of_test_case('cancel receipt before total button is clicked')
+            general_functions.start_of_test_case('TC cancel receipt before total button is clicked')
             receipt_meta_data_array = general_functions.get_receipt_meta_data()
             general_buttons.main_page_key_pad_btns_click('CANCEL')
         else: # cancel after the total button is clicked
             # click TOTAL button
             general_buttons.main_page_key_pad_btns_click('TOTAL')
-            general_functions.start_of_test_case('cancel receipt after total button is clicked')
+            general_functions.start_of_test_case('TC cancel receipt after total button is clicked')
             receipt_meta_data_array = general_functions.get_receipt_meta_data()
             # this is actually the CANCEL TRANSACTION button but it's in the same location as the CANCEL button
             general_buttons.main_page_key_pad_btns_click('CANCEL')
 
         general_functions.four_eyes(l_general_test_settings[4], l_general_test_settings[5])
-
-        #general_functions.general_message_with_subject('test', 'cancellation_warning')
 
         # TEST CASE
         if is_gui_test == 'YES':

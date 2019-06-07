@@ -35,7 +35,7 @@ def issue_tax_form_basic_sale_any_tender():
     y = l_test_settings[0]
     
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('Issue tax form on basic sale paid with ' + str('card AMEX, paying exact amount.'))
+    general_functions.start_of_test_case('TC Issue tax form on basic sale paid with ' + str('card AMEX, paying exact amount.'))
     
     # fil basket and press total button
     wait(0.1)
@@ -105,7 +105,7 @@ def issue_tax_form_after_sale_any_tender():
     ##y = l_test_settings[0]
     
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('Issue tax form on AFTER sale with ' + str('receipt number ...'))
+    general_functions.start_of_test_case('TC Issue tax form on AFTER sale with ' + str('receipt number ...'))
     
     # create a receipt with_number to retrieve for after sales tax free form test case
     #is ok now#

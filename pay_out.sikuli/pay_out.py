@@ -25,7 +25,7 @@ l_test_settings = test_settings.pay_out()
 
 def pay_out():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('pay out')
+    general_functions.start_of_test_case('TC pay out')
     general_functions.extended_wait("main_page_key_pad", 300)
 
     # TEST CASE

@@ -18,7 +18,7 @@ l_test_settings = test_settings.returns(locale)
 
 
 def returns_with_out_receipt_item_not_found():
-    general_functions.start_of_test_case('returns without receipt item not found')
+    general_functions.start_of_test_case('TC returns without receipt item not found')
     # add items to be returned
     returns_with_out_receipt_add_return_items()
     # finish returns
@@ -28,7 +28,7 @@ def returns_with_out_receipt_item_not_found():
 
 def returns_with_out_receipt_item_not_found_and_exchange():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('returns without receipt item not found and exchange')
+    general_functions.start_of_test_case('TC returns without receipt item not found and exchange')
     # add items to be returned
     returns_with_out_receipt_add_return_items()
 
@@ -98,7 +98,7 @@ def returns_with_out_receipt_add_return_items():
 
 
 def with_loyalty_number():
-    general_functions.start_of_test_case('returns without receipt with loyalty number')
+    general_functions.start_of_test_case('TC returns without receipt with loyalty number')
 
     # add items to be returned
     returns_with_out_receipt_add_return_items()

@@ -25,7 +25,7 @@ l_test_settings = test_settings.commission_sale()
 
 def line_items():
     general_functions.errorhandling("ABORT")
-    general_functions.start_of_test_case('commission sale line item')
+    general_functions.start_of_test_case('TC commission sale line item')
     
     general_functions.fill_basket(l_test_settings[0], l_test_settings[1])
 
