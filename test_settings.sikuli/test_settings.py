@@ -4,9 +4,9 @@ from sikuli import *
 def general_test_settings():
     #                               ENV    STORE   CASHIER PASSW   MANAGERPASSW    BRAND TILL   LOCALE  #DENOMINATIONS BASE DIR                      GUI TEST
     #   l_general_test_settings = ["TST", "A424", "101", "11111", "100", "50055", "CK", "101", "en_GB", 5, "C:\\Users\\31000pos\\Desktop\\Sikuli\\", False, "FP", "TH"]
-    #   l_general_test_settings = ["TST", "AN08", "101", "30033", "100", "30033", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", False, "FP", "BE"]
+    l_general_test_settings = ["TST", "AN08", "101", "30033", "100", "30033", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", False, "FP", "BE"]
     #   l_general_test_settings = ["TST", "A233", "250", "30033", "251", "30033", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", False, "FP", "DE"]
-    l_general_test_settings = ["TST", "AL00", "101", "30033", "100", "50055", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", "NO", "FP", "NL"]
+    #l_general_test_settings = ["TST", "AL00", "101", "30033", "100", "50055", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", "NO", "FP", "NL"]
     return l_general_test_settings
 
 
