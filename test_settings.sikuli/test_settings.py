@@ -3,9 +3,14 @@ from sikuli import *
 
 def general_test_settings():
     #                               ENV    STORE   CASHIER PASSW   MANAGERPASSW    BRAND TILL   LOCALE  #DENOMINATIONS BASE DIR                      GUI TEST
+    # DK23tst05
     #   l_general_test_settings = ["TST", "A424", "101", "11111", "100", "50055", "CK", "101", "en_GB", 5, "C:\\Users\\31000pos\\Desktop\\Sikuli\\", False, "FP", "TH"]
+	# DK23tst06
+    #l_general_test_settings = ["TST", "A007", "101", "30033", "100", "30033", "CK", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", False, "FP", "BE"]
     l_general_test_settings = ["TST", "AN08", "101", "30033", "100", "30033", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", False, "FP", "BE"]
-    #   l_general_test_settings = ["TST", "A233", "250", "30033", "251", "30033", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", False, "FP", "DE"]
+    # DK23tst0_
+	#   l_general_test_settings = ["TST", "A233", "250", "30033", "251", "30033", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", False, "FP", "DE"]
+    # DK23tst02
     #l_general_test_settings = ["TST", "AL00", "101", "30033", "100", "50055", "TH", "101", "en_GB", 5, "C:\\Users\\31000Pos\\Desktop\\Sikuli\\", "NO", "FP", "NL"]
     return l_general_test_settings
 
@@ -314,18 +319,47 @@ def price_override(locale):
 def local_employee_discount(locale):
     l_test_settings = ''
     test_specific_settings = get_test_specific_settings( )
-    if locale == 'en_GB':
+
+	# employee discounts are allowed in BE, DE, ...; (NL, ...=not allowed); cross brand allowed at TH, ... ??
+	if l_general_test_settings[13] in ('BE', 'DE'):  # country allowes discounts, like Belgium, Germany, ...
+		if l_general_test_settings[6] == 'TH':  # brand is TH
         #                    0                 1   2     3  4   5
         #                    ARTICLE           #  empl#  FN LN  %
-        l_test_settings = [[test_specific_settings[0], 3, '111111', '', '', '15% 3 percentages'],
-                           [test_specific_settings[0], 2, '222222', '', '', '30% 3 percentages'],
-                           [test_specific_settings[0], 2, '333333', '', '', '50% 3 percentages'],
-                           [test_specific_settings[0], 3, '444444', '', '', '30% 3 percentages'],
-                           [test_specific_settings[0], 3, '555555', '', '', '30% 3 percentages'],
-                           [test_specific_settings[0], 1, '666666', '', '', '50% 3 percentages'],
-                           [test_specific_settings[0], 1, '777777', '', '', '50% 3 percentages']]
+        l_test_settings = [
+						   # [test_specific_settings[0], 3, '111111', '', '', '15% 3 percentages'],
+                           # [test_specific_settings[0], 2, '222222', '', '', '30% 3 percentages'],
+                           # [test_specific_settings[0], 2, '333333', '', '', '50% 3 percentages'],
+                           # [test_specific_settings[0], 3, '444444', '', '', '30% 3 percentages'],
+                           # [test_specific_settings[0], 3, '555555', '', '', '30% 3 percentages'],
+                           # [test_specific_settings[0], 1, '666666', '', '', '50% 3 percentages'],
+                           # [test_specific_settings[0], 1, '777777', '', '', '50% 3 percentages']
+                           [test_specific_settings[0], 1, '777777', '', '', '50% 3 percentages']
+						   ]
 
         return l_test_settings
+
+# #	store id	brand type location	country	SuccessFactors ID	First Name	Last Name	StoreForce ID	Job Level	Product Discount
+# 1	A007	CKJ Woluwe	BE	90014250	Omar	Lessard	5114250	Manager	Yes
+# 2	A008	CKU Outlet Maasmechelen	BE	90006847	Celestine	Bahrig	334461	Store Employee	Yes
+# 3	A119	CKU Cologne Weiden	DE	90006853	Carina	Winterstein	506853	Coordinator	Yes
+# ... start with AN08 to dev and test
+# 18	AN08	TH Jeans Wijnegem	BE	90014117	John	Test	514117
+# 19	AN19	TH Outlet Maasmechelen	BE	90014296	Sandra	Jones	514296
+# 20	AN21	TH Luxembourg	LU	90014287	Richard	Robillard	5114287
+
+
+    # original code was:
+    # #if locale == 'en_GB':
+        # #                    0                 1   2     3  4   5
+        # #                    ARTICLE           #  empl#  FN LN  %
+        # l_test_settings = [[test_specific_settings[0], 3, '111111', '', '', '15% 3 percentages'],
+                           # [test_specific_settings[0], 2, '222222', '', '', '30% 3 percentages'],
+                           # [test_specific_settings[0], 2, '333333', '', '', '50% 3 percentages'],
+                           # [test_specific_settings[0], 3, '444444', '', '', '30% 3 percentages'],
+                           # [test_specific_settings[0], 3, '555555', '', '', '30% 3 percentages'],
+                           # [test_specific_settings[0], 1, '666666', '', '', '50% 3 percentages'],
+                           # [test_specific_settings[0], 1, '777777', '', '', '50% 3 percentages']]
+        # return l_test_settings
 
 
 def promotions():
